@@ -1,13 +1,15 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import MainPage from "./pages/MainPage";
 
-import { MainPage } from "./pages/MainPage/index.jsx";
 
-export default function Routes() {
+
+const AppRoutes = () => {
     return (
-        <Router>
-            <Switch>
-                <Route path="/" exact component={MainPage} />
-            </Switch>
-        </Router>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="*" element={<div>Página não encontrada</div>} />
+      </Routes>
     );
-}
+  };
+  
+  export default AppRoutes;

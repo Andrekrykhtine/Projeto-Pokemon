@@ -5,8 +5,8 @@ import { ListPokemon } from "../../Componets/pokemons";
 
 const MainPage = () => (
         <Container>
-            <PokedexImg src={Pokedex} alt="Pokedex"/>
             <ListPokemon />
+            <PokedexImg src={Pokedex} alt="Pokedex"/>
         </Container>
     );
 

@@ -1,13 +1,22 @@
 import { QueryClient, QueryClientProvider } from "react-query"
-import MainPage  from "./pages/MainPage/index.jsx";
-import { ListPokemon } from "./Componets/pokemons.jsx";
+import { BrowserRouter as Router } from "react-router-dom";
+import Theme from "./styles/Theme";
+import { GlobalStyle } from "./styles/global";
+import AppRoutes from "./routes";
+
 function App() {
   const queryClient = new QueryClient();
 
   return (
     <QueryClientProvider client={queryClient}>
-      <MainPage />
-      <ListPokemon />
+      <Theme>
+        <GlobalStyle />
+        <Router>
+        
+            <AppRoutes />
+          
+        </Router>
+      </Theme>
     </ QueryClientProvider>
   )
 }
