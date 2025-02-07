@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ListPokemon } from './ListPokemon';
+import { ListPokemon } from '../ListPokemon/ListPokemon';
 import Button from './Button';
 
 const LoadMore = () => {

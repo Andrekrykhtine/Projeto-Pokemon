@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { ListCard,Card, ImagePokemon } from './style';
 
@@ -32,7 +32,7 @@ export const ListPokemon = () => {
     const [pokemonIds, setPokemonIds] = useState([]);
 
     // Gera os IDs dos Pokémon quando o componente é montado
-    useState(() => {
+    useEffect(() => {
         const uniqueNumbers = getId(10, 1, 700);
         setPokemonIds(uniqueNumbers);
     }, []);
