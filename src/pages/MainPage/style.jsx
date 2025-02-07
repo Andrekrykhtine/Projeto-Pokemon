@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
-
 export const Container = styled.div`
-    background-color:#000000;
+    background-color: ${(props) => props.theme.colors.background};
     background-size: couver;
     display: flex;
     flex-direction: column;

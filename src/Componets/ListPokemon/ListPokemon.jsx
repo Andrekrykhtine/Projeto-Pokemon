@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useQuery } from 'react-query';
+import { ListCard,Card, ImagePokemon } from './style';
 
 // Função para gerar IDs únicos
 function getId(quantity, min, max) {
@@ -59,15 +60,15 @@ export const ListPokemon = () => {
         <section>
             <ul>
                 {data?.map((pokemon, index) => (
-                    <li key={index}>
-                        <a>
-                            <p>{pokemon.name}</p>
-                            <img
+                    <ListCard key={index}>
+                        <Card>
+                            <ImagePokemon
                                 src={pokemon.sprites.other["official-artwork"].front_default}
                                 alt={`Imagem do ${pokemon.name}`}
-                            />
-                        </a>
-                    </li>
+                                />
+                            <p>{pokemon.name}</p>
+                        </Card>
+                    </ListCard>
                 ))}
             </ul>
         </section>

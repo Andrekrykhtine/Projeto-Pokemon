@@ -10,7 +10,7 @@ export const theme = {
     // Cores padrão
     primary: "#1B1B1B",
     secondary: "#E5E5E5",
-    background: "#1B1B1B",
+    background: "#e5e5e5e5",
     container: "#1B1B1B",
     text: "#E5E5E5",
     link: "#E5E5E5",
