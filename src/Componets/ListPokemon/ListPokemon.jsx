@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState} from 'react';
 import { useQuery } from 'react-query';
 import { ListCard,Card, ImagePokemon } from './style';
 
 // Função para gerar IDs únicos
-function getId(quantity, min, max) {
+const getId = (quantity, min, max) => {
     if (quantity > (max - min + 1)) {
         throw new Error("The requested quantity of numbers is greater than the available range.");
     }
@@ -32,7 +32,7 @@ export const ListPokemon = () => {
     const [pokemonIds, setPokemonIds] = useState([]);
 
     // Gera os IDs dos Pokémon quando o componente é montado
-    useEffect(() => {
+    useState(() => {
         const uniqueNumbers = getId(10, 1, 700);
         setPokemonIds(uniqueNumbers);
     }, []);

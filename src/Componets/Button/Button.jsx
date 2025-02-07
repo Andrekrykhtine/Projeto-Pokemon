@@ -1,12 +1,8 @@
 import { Buttons} from "./style";
 import PropTypes from 'prop-types';
 
-
-
-
-
 const Button = ({children}) => (
-    <Buttons  >
+    <Buttons >
         {children}
     </Buttons>
 );
