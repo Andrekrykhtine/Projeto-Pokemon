@@ -19,9 +19,4 @@ export const PokedexImg = styled.img`
   
 `;
 
-export const ListsPokemon = styled.div`
-    display: flex;
-    flax-direction: column;
-    position: relative;
-    z-index: 1;
-    `;
+

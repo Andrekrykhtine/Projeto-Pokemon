@@ -27,7 +27,7 @@ const fetchPokemonData = async (id) => {
     return response.json();
 };
 
-export default function ButtonExample() {
+export default function ListPokemon() {
     const [pokemonIds, setPokemonIds] = useState([]);
     const [allPokemonData, setAllPokemonData] = useState([]);
     const [limitReached, setLimitReached] = useState(false);
@@ -57,7 +57,7 @@ export default function ButtonExample() {
         setLimitReached(false);
     };
 
-    const { isLoading, isError, error } = useQuery(
+    const { isError, error } = useQuery(
         ['pokemons', pokemonIds],
         async () => {
             const newData = await Promise.all(
@@ -86,7 +86,7 @@ export default function ButtonExample() {
         }
     );
 
-    if (isLoading) return <p>Carregando...</p>;
+  
     if (isError) return <p>Erro: {error.message}</p>;
 
     return (
@@ -115,7 +115,7 @@ export default function ButtonExample() {
                 onClick={handleClick}
                 disabled={limitReached}
             >
-                Clique em mim
+                Carregar mais...
             </Button>
 
             <Button
