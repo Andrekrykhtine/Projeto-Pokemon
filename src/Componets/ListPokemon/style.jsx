@@ -33,8 +33,22 @@ color: ${(props) => props.theme.colors.red};
 font-weight: 700;
 `;
 
-export const ListContainer = styled.ul`
-display: grid;
-grid-template-columns: repeat(2, minmax(150px, 1fr));
-gap: 1rem;
+export const Main = styled.main`
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza horizontalmente */
+  justify-content: center; /* Centraliza verticalmente (opcional) */
+  padding: 20px;
+  min-height: 100vh; /* Garante que ocupe toda a altura da tela */
+  background-color:rgb(228, 223, 223); /* Cor de fundo opcional */
+`;
+
+export const ListContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Espaçamento entre os cards */
+  justify-content: center; /* Centraliza os cards horizontalmente */
+  width: 100%;
+  max-width: 500px; /* Largura máxima para evitar que fique muito largo */
+  margin: 0 auto; /* Centraliza o container na tela */
 `;

@@ -1,7 +1,7 @@
 // PokemonList.js
 import { useState, useEffect } from 'react';
 import { useQuery } from 'react-query';
-import { ListContainer } from './style';
+import { ListContainer, Main } from './style';
 import PokemonCard from '../PokemonCard/PokemonCard';
 import { getId, fetchPokemonData } from '../../services/utils';
 import Button from '../Button/Button';
@@ -60,15 +60,17 @@ const ListPokemon = () => {
 
   return (
     <>
-      <ListContainer>
-        {allPokemonData?.map((pokemon, index) => (
-          <PokemonCard key={index} pokemon={pokemon} />
-        ))}
-      </ListContainer>
-      <Button onClick={handleClick} disabled={limitReached} />
-      <Button onClick={handleReset} />
-    </>
-  );
+      <Main>
+        <ListContainer>
+          {allPokemonData?.map((pokemon, index) => (
+            <PokemonCard key={index} pokemon={pokemon} />
+          ))}
+        </ListContainer>
+        <Button onClick={handleClick} disabled={limitReached}>Carregar mais... </Button>
+        <Button onClick={handleReset}> Limpar </Button>
+        </Main>
+      </>
+      );
 };
 
-export default ListPokemon;
+      export default ListPokemon;
