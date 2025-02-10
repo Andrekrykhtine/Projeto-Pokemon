@@ -27,3 +27,14 @@ export const ImagePokemon = styled.img`
 width: 100px;
 height: 100px;
 `; 
+
+export const LimitReached = styled.p`
+color: ${(props) => props.theme.colors.red};
+font-weight: 700;
+`;
+
+export const ListContainer = styled.ul`
+display: grid;
+grid-template-columns: repeat(2, minmax(150px, 1fr));
+gap: 1rem;
+`;

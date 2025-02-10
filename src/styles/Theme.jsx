@@ -6,6 +6,7 @@ export const theme = {
   colors: {
     white: "#fff",
     black: "#000",
+    red: "#ff0000",
 
     // Cores padrão
     primary: "#1B1B1B",

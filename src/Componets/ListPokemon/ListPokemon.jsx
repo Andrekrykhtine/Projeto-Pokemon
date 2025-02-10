@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useQuery } from 'react-query';
-import { ListCard, Card, ImagePokemon } from './style';
+import { ListCard, Card, ImagePokemon,LimitReached ,ListContainer } from './style';
+import Button from '../Button/Button';
+import { Link } from 'react-router-dom';
 
 const getId = (quantity, min, max) => {
     if (quantity > (max - min + 1)) {
@@ -89,10 +91,10 @@ export default function ButtonExample() {
 
     return (
         <section>
-            <ul>
+            <ListContainer>
                 {allPokemonData?.map((pokemon, index) => (
                     <ListCard key={index}>
-                        <Card>
+                     <Card as={Link} to={`/pokemon/${pokemon.id}`}>
                             <ImagePokemon
                                 src={pokemon.sprites.other["official-artwork"].front_default}
                                 alt={`Imagem do ${pokemon.name}`}
@@ -101,28 +103,26 @@ export default function ButtonExample() {
                         </Card>
                     </ListCard>
                 ))}
-            </ul>
+            </ListContainer>
 
             {limitReached && (
-                <p style={{ color: 'red', fontWeight: 'bold' }}>
+                <LimitReached >
                     Limite de 100 Pokémon atingido!
-                </p>
+                </LimitReached>
             )}
 
-            <button
+            <Button
                 onClick={handleClick}
-                className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
                 disabled={limitReached}
             >
                 Clique em mim
-            </button>
+            </Button>
 
-            <button
-                onClick={handleReset}
-                className="bg-red-500 text-white p-2 rounded hover:bg-red-600 mt-4"
+            <Button
+                onClick={handleReset}         
             >
                 Resetar Lista
-            </button>
+            </Button>
         </section>
     );
 }
