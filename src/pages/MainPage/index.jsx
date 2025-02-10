@@ -1,16 +1,16 @@
-// HTML do componente princiapal
-import { Container, PokedexImg} from "./style";
-import Pokedex from "../../assets/images/pokedex.svg";
-import  ListPokemon  from "../../Componets/ListPokemon/ListPokemon";
+import LimitReachedMessage from "../../Componets/LimitReachedMessage/LimitReachedMessage";
+import ListPokemon from '../../Componets/ListPokemon/ListPokemon';
+import Button from '../../Componets/Button/Button';
 
+const MainPage = () => {
+  return (
+    <section>
+      <ListPokemon />
+      <LimitReachedMessage />
+      <Button />
+      <Button/>
+    </section>
+  );
+};
 
-
-const MainPage = () => (
-        <Container>
-            <ListPokemon />
-            {/* <PokedexImg src={Pokedex} alt="Pokedex"/> */}
-        </Container>
-    );
-
-    export default MainPage
-
+export default MainPage;
