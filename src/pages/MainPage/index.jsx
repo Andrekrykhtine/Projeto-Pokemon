@@ -6,9 +6,9 @@ const MainPage = () => {
   return (
     <section>
       <ListPokemon />
-      <LimitReachedMessage />
+      {/* <LimitReachedMessage />
       <Button />
-      <Button/>
+      <Button/> */}
     </section>
   );
 };
