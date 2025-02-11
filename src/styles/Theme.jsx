@@ -17,7 +17,7 @@ export const theme = {
     link: "#E5E5E5",
   },
 
-  fonts: ["Open Sans", "sans-serif"].join(", "),
+  fonts: ["Press Start 2P", "sans-serif"].join(", "),
   fontsize: {
     small: "0.8rem", 
     normal: "1rem",

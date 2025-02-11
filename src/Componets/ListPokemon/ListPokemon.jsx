@@ -63,6 +63,7 @@ const ListPokemon = () => {
     <>
       <Main>
         <ListContainer>
+        {console.log('Renderizando allPokemonData:', allPokemonData)}
           {allPokemonData?.map((pokemon, index) => (
             <PokemonCard key={index} pokemon={pokemon} />
           ))}
