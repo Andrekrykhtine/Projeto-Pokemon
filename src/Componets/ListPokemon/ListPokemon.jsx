@@ -5,6 +5,7 @@ import { ListContainer, Main } from './style';
 import PokemonCard from '../PokemonCard/PokemonCard';
 import { getId, fetchPokemonData } from '../../services/utils';
 import Button from '../Button/Button';
+import LimitReachedMessage from '../LimitReachedMessage/LimitReachedMessage';
 
 const ListPokemon = () => {
   const [pokemonIds, setPokemonIds] = useState([]);
@@ -66,6 +67,9 @@ const ListPokemon = () => {
             <PokemonCard key={index} pokemon={pokemon} />
           ))}
         </ListContainer>
+
+        {limitReached && <LimitReachedMessage />}
+
         <Button onClick={handleClick} disabled={limitReached}>Carregar mais... </Button>
         <Button onClick={handleReset}> Limpar </Button>
         </Main>
