@@ -1,10 +1,13 @@
 import ListPokemon from '../../Componets/ListPokemon/ListPokemon';
+import { ThemeToggleButton } from '../../Componets/themeTogglerButton/themeTogglerButton';
 
 const MainPage = () => {
+
+
   return (
-    <section>
-      <ListPokemon />
-  
+    <section >
+        <ListPokemon />
+        <ThemeToggleButton />
     </section>
   );
 };

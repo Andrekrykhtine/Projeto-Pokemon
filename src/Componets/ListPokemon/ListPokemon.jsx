@@ -1,13 +1,14 @@
-// PokemonList.js
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useQuery } from 'react-query';
 import { ListContainer, Main } from './style';
 import PokemonCard from '../PokemonCard/PokemonCard';
 import { getId, fetchPokemonData } from '../../services/utils';
-import Button from '../Button/Button';
+import {Button} from '../Button/Button';
 import LimitReachedMessage from '../LimitReachedMessage/LimitReachedMessage';
-
+import { ThemeContext } from '../../contexts/ThemeContext';
+import LoadingSpinner from '../LoadingSpiner/LoadingSpiner';
 const ListPokemon = () => {
+  const { theme } = useContext(ThemeContext);
   const [pokemonIds, setPokemonIds] = useState([]);
   const [allPokemonData, setAllPokemonData] = useState([]);
   const [limitReached, setLimitReached] = useState(false);
@@ -35,7 +36,7 @@ const ListPokemon = () => {
     setLimitReached(false);
   };
 
-  const { isError, error } = useQuery(
+  const { isError, error, isLoading } = useQuery(
     ['pokemons', pokemonIds],
     async () => {
       const newData = await Promise.all(pokemonIds.map(id => fetchPokemonData(id)));
@@ -56,13 +57,15 @@ const ListPokemon = () => {
       refetchOnWindowFocus: false,
     }
   );
-
   if (isError) return <p>Erro: {error.message}</p>;
+
+
 
   return (
     <>
       <Main>
-        <ListContainer>
+        <ListContainer style={{backgroundColor: theme.backgroundColor, color: theme.color }} >
+        {isLoading && <LoadingSpinner />} 
         {console.log('Renderizando allPokemonData:', allPokemonData)}
           {allPokemonData?.map((pokemon, index) => (
             <PokemonCard key={index} pokemon={pokemon} />
@@ -71,8 +74,10 @@ const ListPokemon = () => {
 
         {limitReached && <LimitReachedMessage />}
 
-        <Button onClick={handleClick} disabled={limitReached}>Carregar mais... </Button>
-        <Button onClick={handleReset}> Limpar </Button>
+        <Button onClick={handleClick} disabled={limitReached || isLoading}>
+          {isLoading ? 'Carregando...' : 'Carregar mais...'}
+        </Button>
+        <Button onClick={handleReset}> Resetar Lista </Button>
         </Main>
       </>
       );
