@@ -20,6 +20,12 @@ const PokemonDetails = ({ pokemon }) => {
           <li key={moveInfo.move.name}>{moveInfo.move.name}</li>
         ))}
       </ul>
+      <h2>Habilidades:</h2>
+      <ul>
+        {pokemon.abilities.slice(0, 10).map((abilitiesInfo) => (
+          <li key={abilitiesInfo.ability.name}>{abilitiesInfo.ability.name}</li>
+        ))}
+      </ul>
     </StyledContainer>
   );
 };
@@ -62,6 +68,11 @@ PokemonDetails.propTypes = {
         type: PropTypes.shape({
           name: PropTypes.string.isRequired,
         }).isRequired,
+      }).isRequired
+    ).isRequired,
+    abilities: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
       }).isRequired
     ).isRequired,
     moves: PropTypes.arrayOf(

@@ -63,6 +63,7 @@ const ListPokemon = () => {
       refetchOnWindowFocus: false,
     }
   );
+console.log(allPokemonData);
 
   // Filtra os Pokémon pelo tipo selecionado
   const filteredPokemon = selectedType
@@ -70,6 +71,9 @@ const ListPokemon = () => {
     : allPokemonData;
 
   if (isError) return <p>Erro: {error.message}</p>;
+
+  
+  
 
   return (
     <>
