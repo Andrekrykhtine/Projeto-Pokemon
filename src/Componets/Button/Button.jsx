@@ -18,7 +18,7 @@ import { ThemeContext } from "../../contexts/ThemeContext";
             onClick={onClick}
             disabled={disabled}
             type={type}
-            style={{backgroundColor: theme.backgroundColor, color: theme.color}}
+            theme={theme} 
             {...rest}
         >
             {children}
@@ -29,7 +29,6 @@ import { ThemeContext } from "../../contexts/ThemeContext";
 Button.propTypes = {
     onClick: PropTypes.func,
     disabled: PropTypes.bool,
-    className: PropTypes.string,
     type: PropTypes.string,
     children: PropTypes.node,
 };

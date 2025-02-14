@@ -3,15 +3,20 @@ import { useQuery } from 'react-query';
 import { ListContainer, Main } from './style';
 import PokemonCard from '../PokemonCard/PokemonCard';
 import { getId, fetchPokemonData } from '../../services/utils';
-import {Button} from '../Button/Button';
+import { Button } from '../Button/Button';
 import LimitReachedMessage from '../LimitReachedMessage/LimitReachedMessage';
 import { ThemeContext } from '../../contexts/ThemeContext';
 import LoadingSpinner from '../LoadingSpiner/LoadingSpiner';
+import {pokemonTypes} from '../../services/pokemonTypes'
+import TypeFilter from '../Filter/Fliter';
+import { ThemeTogglerButton } from '../themeTogglerButton/themeTogglerButton';
+
 const ListPokemon = () => {
   const { theme } = useContext(ThemeContext);
   const [pokemonIds, setPokemonIds] = useState([]);
   const [allPokemonData, setAllPokemonData] = useState([]);
   const [limitReached, setLimitReached] = useState(false);
+  const [selectedType, setSelectedType] = useState(null); // Estado para o tipo selecionado
 
   // Initialize with 10 Pokémon when component first loads
   useEffect(() => {
@@ -34,6 +39,7 @@ const ListPokemon = () => {
     setPokemonIds(resetIds);
     setAllPokemonData([]);
     setLimitReached(false);
+    setSelectedType(null); // Reseta o tipo selecionado
   };
 
   const { isError, error, isLoading } = useQuery(
@@ -57,17 +63,25 @@ const ListPokemon = () => {
       refetchOnWindowFocus: false,
     }
   );
+
+  // Filtra os Pokémon pelo tipo selecionado
+  const filteredPokemon = selectedType
+    ? allPokemonData.filter((pokemon) => pokemon.types.some((type) => type.type.name === selectedType))
+    : allPokemonData;
+
   if (isError) return <p>Erro: {error.message}</p>;
-
-
 
   return (
     <>
       <Main>
-        <ListContainer style={{backgroundColor: theme.backgroundColor, color: theme.color }} >
-        {isLoading && <LoadingSpinner />} 
-        {console.log('Renderizando allPokemonData:', allPokemonData)}
-          {allPokemonData?.map((pokemon, index) => (
+        <TypeFilter
+          types={pokemonTypes}
+          selectedType={selectedType}
+          onSelectType={setSelectedType} // Atualiza o tipo selecionado
+        />
+        <ListContainer style={{ backgroundColor: theme.backgroundColor, color: theme.color }}>
+          {isLoading && <LoadingSpinner />}
+          {filteredPokemon?.map((pokemon, index) => (
             <PokemonCard key={index} pokemon={pokemon} />
           ))}
         </ListContainer>
@@ -78,9 +92,13 @@ const ListPokemon = () => {
           {isLoading ? 'Carregando...' : 'Carregar mais...'}
         </Button>
         <Button onClick={handleReset}> Resetar Lista </Button>
-        </Main>
-      </>
-      );
+        <Button onClick={() => setSelectedType(null)} disabled={!selectedType}>
+          Mostrar Todos
+        </Button>
+        <ThemeTogglerButton />
+      </Main>
+    </>
+  );
 };
 
-      export default ListPokemon;
+export default ListPokemon;

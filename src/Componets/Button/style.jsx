@@ -3,14 +3,16 @@ import styled from "styled-components";
 export const Buttons = styled.button`
   padding: 10px 20px;
   font-size: 16px;
-  background-color: ${(props) => (props.disabled ? '#ccc' : '#09f')};
-  color: ${(props) => (props.disabled ? '#666' : '#fff')};
+  background-color: ${({ theme }) => theme.backgroundColor};
+  color: ${({ theme }) => theme.color};
   border: none;
   border-radius: 5px;
-  cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
-  transition: background-color 0.3s ease;
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+  opacity: ${({ disabled }) => (disabled ? 0.6 : 1)};
+  transition: background-color 0.3s ease, opacity 0.3s ease;
 
   &:hover {
-    background-color: ${(props) => (props.disabled ? '#ccc' : '#007acc')};
+    background-color: ${({ theme, disabled }) =>
+      disabled ? theme.backgroundColor : theme.hoverBackgroundColor};
   }
 `;
