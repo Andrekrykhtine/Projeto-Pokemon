@@ -1,25 +1,36 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { pokemonTypes } from '../../services/pokemonTypes';
 
 const PokemonDetails = ({ pokemon }) => {
   if (!pokemon) return null;
+
+  const getTypeIcon = (typeName) => {
+    const type = pokemonTypes.find((type) => type.name === typeName);
+    return type ? type.icon : ''; // Retorna o ícone ou uma string vazia se não encontrado
+  };
 
   return (
     <StyledContainer>
       <h1>{pokemon.name.toUpperCase()}</h1>
       <img src={pokemon.sprites.other["official-artwork"].front_default} alt={pokemon.name} />
+
       <h2>Tipo:</h2>
       <ul>
         {pokemon.types.map((typeInfo) => (
-          <li key={typeInfo.type.name}>{typeInfo.type.name}</li>
+          <li key={typeInfo.type.name}>
+            {getTypeIcon(typeInfo.type.name)} {typeInfo.type.name}
+          </li>
         ))}
       </ul>
+
       <h2>Movimentos:</h2>
       <ul>
         {pokemon.moves.slice(0, 10).map((moveInfo) => (
           <li key={moveInfo.move.name}>{moveInfo.move.name}</li>
         ))}
       </ul>
+      
       <h2>Habilidades:</h2>
       <ul>
         {pokemon.abilities.slice(0, 10).map((abilitiesInfo) => (
