@@ -70,12 +70,15 @@ export const ButtonsContainer = styled.div`
 export const FilterColumn = styled.div`
   display: flex;
   flex-direction: column;
+
   gap: 10px; /* Espaçamento entre os itens do filtro */
-  padding: 20px;
+  padding: 5px;
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: relative;
+  top: -600px;
+  left: 235px;
 `;
 
 
