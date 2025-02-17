@@ -78,11 +78,11 @@ console.log(allPokemonData);
   return (
     <>
       <Main>
-        {/* <TypeFilter
+        <TypeFilter
           types={pokemonTypes}
           selectedType={selectedType}
           onSelectType={setSelectedType} // Atualiza o tipo selecionado
-        /> */}
+        />
         <ListContainer style={{ backgroundColor: theme.backgroundColor, color: theme.color }}>
           {isLoading && <LoadingSpinner />}
           {filteredPokemon?.map((pokemon, index) => (
