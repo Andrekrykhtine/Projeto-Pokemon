@@ -46,3 +46,5 @@ export const ListContainer = styled.div`
   justify-content: center; /* Centraliza os cards horizontalmente */
    width: 100%;
  `;
+
+ 

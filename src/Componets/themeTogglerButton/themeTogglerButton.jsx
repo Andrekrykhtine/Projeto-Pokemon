@@ -1,13 +1,22 @@
 import { useContext } from "react"
 import { ThemeContext, themes } from "../../contexts/ThemeContext"
-import {Button} from "../Button/Button"
-export const ThemeTogglerButton = () => {
-    const {theme, setTheme} = useContext(ThemeContext)
+import {StyledThemeButton} from "./style"
 
+export const ThemeTogglerButton = () => {
+    const { theme, setTheme } = useContext(ThemeContext);
+    
+    const isDarkMode = theme === themes.dark;
+    
+    const toggleTheme = () => {
+      setTheme(isDarkMode ? themes.light : themes.dark);
+    };
     
     return (
-        <div>
-            <Button onClick={()=> setTheme(theme === themes.light ? themes.dark : themes.light)}>Clique aqui </Button>
-        </div>
-    )
-}
+      <StyledThemeButton 
+        onClick={toggleTheme}
+        isDarkMode={isDarkMode}
+      >
+        {isDarkMode ? "Modo Claro ☀️" : "Modo Escuro 🌙"}
+      </StyledThemeButton>
+    );
+  };

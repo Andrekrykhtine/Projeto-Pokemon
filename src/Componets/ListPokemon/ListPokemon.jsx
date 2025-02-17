@@ -7,7 +7,7 @@ import { Button } from '../Button/Button';
 import LimitReachedMessage from '../LimitReachedMessage/LimitReachedMessage';
 import { ThemeContext } from '../../contexts/ThemeContext';
 import LoadingSpinner from '../LoadingSpiner/LoadingSpiner';
-import {pokemonTypes} from '../../services/pokemonTypes'
+import { pokemonTypes } from '../../services/pokemonTypes'
 import TypeFilter from '../Filter/Fliter';
 
 
@@ -63,7 +63,7 @@ const ListPokemon = () => {
       refetchOnWindowFocus: false,
     }
   );
-console.log(allPokemonData);
+  console.log(allPokemonData);
 
   // Filtra os Pokémon pelo tipo selecionado
   const filteredPokemon = selectedType
@@ -72,8 +72,6 @@ console.log(allPokemonData);
 
   if (isError) return <p>Erro: {error.message}</p>;
 
-  
-  
 
   return (
     <>
@@ -91,15 +89,16 @@ console.log(allPokemonData);
         </ListContainer>
 
         {limitReached && <LimitReachedMessage />}
+       
+          <Button onClick={handleClick} disabled={limitReached || isLoading}>
+            {isLoading ? 'Carregando...' : 'Carregar mais...'}
+          </Button>
+          <Button onClick={handleReset}> Resetar Lista </Button>
+          <Button onClick={() => setSelectedType(null)} disabled={!selectedType}>
+            Mostrar Todos
+          </Button>
+    
 
-        <Button onClick={handleClick} disabled={limitReached || isLoading}>
-          {isLoading ? 'Carregando...' : 'Carregar mais...'}
-        </Button>
-        <Button onClick={handleReset}> Resetar Lista </Button>
-        <Button onClick={() => setSelectedType(null)} disabled={!selectedType}>
-          Mostrar Todos
-        </Button>
-      
       </Main>
     </>
   );
