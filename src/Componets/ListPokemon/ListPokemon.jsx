@@ -5,13 +5,9 @@ import { useQuery } from 'react-query';
 import { ListContainer, Main } from './style';
 import PokemonCard from '../PokemonCard/PokemonCard';
 import { getId, fetchPokemonData } from '../../services/utils';
-
 import LimitReachedMessage from '../LimitReachedMessage/LimitReachedMessage';
 import { ThemeContext } from '../../contexts/ThemeContext';
 import LoadingSpinner from '../LoadingSpiner/LoadingSpiner';
-import { pokemonTypes } from '../../services/pokemonTypes'
-import TypeFilter from '../Filter/Fliter';
-
 
 const ListPokemon = ({
   pokemonIds,
@@ -20,8 +16,7 @@ const ListPokemon = ({
   setAllPokemonData,
   limitReached,
   setLimitReached,
-  selectedType,
-  setSelectedType,
+  selectedType, // Recebe o tipo selecionado como prop
 }) => {
   const { theme } = useContext(ThemeContext);
 
@@ -63,23 +58,19 @@ const ListPokemon = ({
   return (
     <>
       <Main>
-        <TypeFilter
-          types={pokemonTypes}
-          selectedType={selectedType}
-          onSelectType={setSelectedType}
-        />
         <ListContainer style={{ backgroundColor: theme.backgroundColor, color: theme.color }}>
           {isLoading && <LoadingSpinner />}
           {filteredPokemon?.map((pokemon, index) => (
             <PokemonCard key={index} pokemon={pokemon} />
           ))}
         </ListContainer>
-
         {limitReached && <LimitReachedMessage />}
       </Main>
     </>
   );
 };
+
+
 ListPokemon.propTypes = {
   pokemonIds: PropTypes.arrayOf(PropTypes.number).isRequired,
   setPokemonIds: PropTypes.func.isRequired,

@@ -36,7 +36,6 @@ export const Main = styled.main`
   align-items: center; /* Centraliza horizontalmente */
   justify-content: center; /* Centraliza verticalmente (opcional) */
   min-height: 100vh; /* Garante que ocupe toda a altura da tela */
-  background-color:rgb(228, 223, 223); /* Cor de fundo opcional */
 `;
 
 export const ListContainer = styled.div`
