@@ -46,9 +46,6 @@ export const Main = styled.main`
 export const ListContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 20px; /* Espaçamento entre os cards */
+  gap: 10px; /* Espaçamento entre os cards */
   justify-content: center; /* Centraliza os cards horizontalmente */
-  width: 100%;
-  max-width: 500px; /* Largura máxima para evitar que fique muito largo */
-  margin: 0 auto; /* Centraliza o container na tela */
-`;
+ `;

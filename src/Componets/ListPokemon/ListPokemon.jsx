@@ -9,7 +9,7 @@ import { ThemeContext } from '../../contexts/ThemeContext';
 import LoadingSpinner from '../LoadingSpiner/LoadingSpiner';
 import {pokemonTypes} from '../../services/pokemonTypes'
 import TypeFilter from '../Filter/Fliter';
-import { ThemeTogglerButton } from '../themeTogglerButton/themeTogglerButton';
+
 
 const ListPokemon = () => {
   const { theme } = useContext(ThemeContext);
@@ -78,11 +78,11 @@ console.log(allPokemonData);
   return (
     <>
       <Main>
-        <TypeFilter
+        {/* <TypeFilter
           types={pokemonTypes}
           selectedType={selectedType}
           onSelectType={setSelectedType} // Atualiza o tipo selecionado
-        />
+        /> */}
         <ListContainer style={{ backgroundColor: theme.backgroundColor, color: theme.color }}>
           {isLoading && <LoadingSpinner />}
           {filteredPokemon?.map((pokemon, index) => (
@@ -99,7 +99,7 @@ console.log(allPokemonData);
         <Button onClick={() => setSelectedType(null)} disabled={!selectedType}>
           Mostrar Todos
         </Button>
-        <ThemeTogglerButton />
+      
       </Main>
     </>
   );
