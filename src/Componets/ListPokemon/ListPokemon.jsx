@@ -1,9 +1,11 @@
-import { useState, useEffect, useContext } from 'react';
+
+import PropTypes from 'prop-types';
+import { useContext, useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { ListContainer, Main } from './style';
 import PokemonCard from '../PokemonCard/PokemonCard';
 import { getId, fetchPokemonData } from '../../services/utils';
-import { Button } from '../Button/Button';
+
 import LimitReachedMessage from '../LimitReachedMessage/LimitReachedMessage';
 import { ThemeContext } from '../../contexts/ThemeContext';
 import LoadingSpinner from '../LoadingSpiner/LoadingSpiner';
@@ -11,36 +13,23 @@ import { pokemonTypes } from '../../services/pokemonTypes'
 import TypeFilter from '../Filter/Fliter';
 
 
-const ListPokemon = () => {
+const ListPokemon = ({
+  pokemonIds,
+  setPokemonIds,
+  allPokemonData,
+  setAllPokemonData,
+  limitReached,
+  setLimitReached,
+  selectedType,
+  setSelectedType,
+}) => {
   const { theme } = useContext(ThemeContext);
-  const [pokemonIds, setPokemonIds] = useState([]);
-  const [allPokemonData, setAllPokemonData] = useState([]);
-  const [limitReached, setLimitReached] = useState(false);
-  const [selectedType, setSelectedType] = useState(null); // Estado para o tipo selecionado
 
   // Initialize with 10 Pokémon when component first loads
   useEffect(() => {
     const initialIds = getId(10, 1, 700);
     setPokemonIds(initialIds);
-  }, []);
-
-  const handleClick = () => {
-    if (allPokemonData.length >= 100) {
-      setLimitReached(true);
-      return;
-    }
-    const uniqueNumbers = getId(10, 1, 700);
-    setPokemonIds(uniqueNumbers);
-    setLimitReached(false);
-  };
-
-  const handleReset = () => {
-    const resetIds = getId(10, 1, 700);
-    setPokemonIds(resetIds);
-    setAllPokemonData([]);
-    setLimitReached(false);
-    setSelectedType(null); // Reseta o tipo selecionado
-  };
+  }, [setPokemonIds]);
 
   const { isError, error, isLoading } = useQuery(
     ['pokemons', pokemonIds],
@@ -63,7 +52,6 @@ const ListPokemon = () => {
       refetchOnWindowFocus: false,
     }
   );
-  console.log(allPokemonData);
 
   // Filtra os Pokémon pelo tipo selecionado
   const filteredPokemon = selectedType
@@ -72,14 +60,13 @@ const ListPokemon = () => {
 
   if (isError) return <p>Erro: {error.message}</p>;
 
-
   return (
     <>
       <Main>
         <TypeFilter
           types={pokemonTypes}
           selectedType={selectedType}
-          onSelectType={setSelectedType} // Atualiza o tipo selecionado
+          onSelectType={setSelectedType}
         />
         <ListContainer style={{ backgroundColor: theme.backgroundColor, color: theme.color }}>
           {isLoading && <LoadingSpinner />}
@@ -89,19 +76,19 @@ const ListPokemon = () => {
         </ListContainer>
 
         {limitReached && <LimitReachedMessage />}
-       
-          <Button onClick={handleClick} disabled={limitReached || isLoading}>
-            {isLoading ? 'Carregando...' : 'Carregar mais...'}
-          </Button>
-          <Button onClick={handleReset}> Resetar Lista </Button>
-          <Button onClick={() => setSelectedType(null)} disabled={!selectedType}>
-            Mostrar Todos
-          </Button>
-    
-
       </Main>
     </>
   );
+};
+ListPokemon.propTypes = {
+  pokemonIds: PropTypes.arrayOf(PropTypes.number).isRequired,
+  setPokemonIds: PropTypes.func.isRequired,
+  allPokemonData: PropTypes.arrayOf(PropTypes.object).isRequired,
+  setAllPokemonData: PropTypes.func.isRequired,
+  limitReached: PropTypes.bool.isRequired,
+  setLimitReached: PropTypes.func.isRequired,
+  selectedType: PropTypes.string,
+  setSelectedType: PropTypes.func.isRequired,
 };
 
 export default ListPokemon;

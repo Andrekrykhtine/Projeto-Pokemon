@@ -58,6 +58,13 @@ export const ThemeButtonWrapper = styled.div`
   z-index: 10;
 `;
 
-
+export const ButtonsContainer = styled.div`
+  display: flex;
+  flex-direction: column; /* Altera a direção para coluna */
+  align-items: center; /* Centraliza os botões horizontalmente */
+  gap: 10px; /* Espaçamento entre os botões */
+  margin-top: 20px;
+  z-index: 10;
+`;
 
 
