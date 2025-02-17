@@ -1,23 +1,26 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-const TypeFilterContainer = styled.div`
+export const TypeFilterContainer = styled.div`
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 10px;
-  margin-bottom: 20px;
+  position: relative;
+  wrap: wrap;
 `;
 
-const TypeButton = styled.button`
-  background: none;
+export const TypeButton = styled.button`
+  padding: 10px;
+  background-color: ${({ selected }) => (selected ? '#007bff' : '#f0f0f0')};
+  color: ${({ selected }) => (selected ? '#fff' : '#000')};
   border: none;
+  border-radius: 5px;
   cursor: pointer;
-  font-size: 24px;
-  padding: 5px;
-  transition: transform 0.2s ease;
+  font-size: 14px;
+  text-align: left;
 
   &:hover {
-    transform: scale(1.2);
+    background-color: ${({ selected }) => (selected ? '#0056b3' : '#ddd')};
   }
 `;
 

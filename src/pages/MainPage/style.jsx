@@ -67,4 +67,17 @@ export const ButtonsContainer = styled.div`
   z-index: 10;
 `;
 
+export const FilterColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Espaçamento entre os itens do filtro */
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+`;
+
+
+
 

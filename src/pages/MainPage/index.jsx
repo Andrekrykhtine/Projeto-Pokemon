@@ -1,9 +1,9 @@
 import { useState,useContext } from 'react';
 import ListPokemon from '../../Componets/ListPokemon/ListPokemon';
 import { ThemeTogglerButton } from '../../Componets/themeTogglerButton/themeTogglerButton';
-import {PokedexImg} from './style'
+
 import pokedex from '../../assets/images/pokedexsemfundo.png'
-import { Section, ListPokemonWrapper, PokedexContainer, ThemeButtonWrapper, ButtonsContainer } from './style';
+import { Section, ListPokemonWrapper, PokedexContainer, ThemeButtonWrapper, ButtonsContainer, FilterColumn ,PokedexImg} from './style';
 import {getId}from '../../services/utils'
 import {Button} from '../../Componets/Button/Button'
 import TypeFilter from '../../Componets/Filter/Fliter'
@@ -55,12 +55,13 @@ const MainPage = () => {
       <ThemeButtonWrapper>
         <ThemeTogglerButton />
       </ThemeButtonWrapper>
-      {/* Adicione o TypeFilter aqui */}
+     <FilterColumn>
       <TypeFilter
         types={pokemonTypes} // Passa a lista de tipos
         selectedType={selectedType} // Passa o tipo selecionado
         onSelectType={setSelectedType} // Passa a função para atualizar o tipo
       />
+      </FilterColumn>
       <ButtonsContainer>
         <Button onClick={handleClick} disabled={limitReached || isLoading}>
           {isLoading ? 'Carregando...' : 'Carregar mais...'}
