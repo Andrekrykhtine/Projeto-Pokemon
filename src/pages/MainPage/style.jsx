@@ -24,7 +24,7 @@ export const PokedexContainer = styled.div`
 // Imagem da Pokedex que ocupa todo o contêiner
 export const PokedexImg = styled.img`
   width: 100%;
-  height: 100%;
+  height: 113%;
   object-fit: contain;
   position: absolute;
   top: 0;
@@ -34,22 +34,20 @@ export const PokedexImg = styled.img`
 // Wrapper da lista de Pokémon posicionado de forma responsiva
 export const ListPokemonWrapper = styled.div`
   position: absolute;
-  top: 17.5%; 
+  top: 19.6%; 
   left: 49.9%; 
-  width: 30.5%; 
-  height: 52.8%; 
+  width: 34.8%; 
+  height: 60.5%; 
   transform: translateX(-50%); 
   overflow-y: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
   scroll-behavior: smooth;
-  background: rgba(255, 255, 255, 0.8);
 
   &::-webkit-scrollbar {
     display: none;
   }
 
- 
 `;
 
 // Botão do tema posicionado de forma responsiva

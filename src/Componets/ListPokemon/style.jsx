@@ -23,10 +23,7 @@ transition: background-color 0.2s;
 };
 `;
 
-export const ImagePokemon = styled.img`
-width: 100px;
-height: 100px;
-`; 
+
 
 export const LimitReached = styled.p`
 color: ${(props) => props.theme.colors.red};
@@ -38,7 +35,6 @@ export const Main = styled.main`
   flex-direction: column;
   align-items: center; /* Centraliza horizontalmente */
   justify-content: center; /* Centraliza verticalmente (opcional) */
-  padding: 20px;
   min-height: 100vh; /* Garante que ocupe toda a altura da tela */
   background-color:rgb(228, 223, 223); /* Cor de fundo opcional */
 `;
@@ -48,4 +44,5 @@ export const ListContainer = styled.div`
   flex-wrap: wrap;
   gap: 10px; /* Espaçamento entre os cards */
   justify-content: center; /* Centraliza os cards horizontalmente */
+   width: 100%;
  `;
