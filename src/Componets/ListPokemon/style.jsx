@@ -46,4 +46,11 @@ export const ListContainer = styled.div`
    width: 100%;
  `;
 
+ export const NoPokemonMessage = styled.div`
+  font-size: 1rem;
+  color: #666;
+  text-align: center;
+  margin-top: 20px;
+`;
+
  

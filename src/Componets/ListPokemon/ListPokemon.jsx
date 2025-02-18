@@ -2,7 +2,7 @@
 import PropTypes from 'prop-types';
 import { useContext, useEffect } from 'react';
 import { useQuery } from 'react-query';
-import { ListContainer, Main } from './style';
+import { ListContainer, Main , NoPokemonMessage } from './style';
 import PokemonCard from '../PokemonCard/PokemonCard';
 import { getId, fetchPokemonData } from '../../services/utils';
 import LimitReachedMessage from '../LimitReachedMessage/LimitReachedMessage';
@@ -16,7 +16,7 @@ const ListPokemon = ({
   setAllPokemonData,
   limitReached,
   setLimitReached,
-  selectedType, // Recebe o tipo selecionado como prop
+  selectedType, 
 }) => {
   const { theme } = useContext(ThemeContext);
 
@@ -55,14 +55,21 @@ const ListPokemon = ({
 
   if (isError) return <p>Erro: {error.message}</p>;
 
+   // Verifica se há Pokémon correspondentes ao tipo selecionado
+   const noPokemonFound = selectedType && filteredPokemon.length === 0;
+
   return (
     <>
       <Main>
         <ListContainer style={{ backgroundColor: theme.backgroundColor, color: theme.color }}>
           {isLoading && <LoadingSpinner />}
-          {filteredPokemon?.map((pokemon, index) => (
-            <PokemonCard key={index} pokemon={pokemon} />
-          ))}
+           {noPokemonFound ? (
+        <NoPokemonMessage>Nenhum Pokémon encontrado desse tipo.</NoPokemonMessage>
+      ) : (
+        filteredPokemon.map(pokemon => (
+          <PokemonCard key={pokemon.id} pokemon={pokemon} />
+        ))
+      )}
         </ListContainer>
         {limitReached && <LimitReachedMessage />}
       </Main>
