@@ -19,6 +19,7 @@ export const PokedexContainer = styled.div`
   width: 100%;
   max-width: 1000px; // Ajuste conforme o tamanho máximo desejado
   aspect-ratio: 16 / 9; // Mantenha proporção da imagem, ajuste conforme necessário
+  align-items: center;
 `;
 
 // Imagem da Pokedex que ocupa todo o contêiner
@@ -59,24 +60,25 @@ export const ThemeButtonWrapper = styled.div`
 `;
 
 export const ButtonsContainer = styled.div`
+  position: absolute;
   display: flex;
-  flex-direction: column; /* Altera a direção para coluna */
-  align-items: center; /* Centraliza os botões horizontalmente */
-  gap: 10px; /* Espaçamento entre os botões */
-  margin-top: 20px;
-  z-index: 10;
+  flex-direction: column;
+  top: 510px; 
+  left: 51%;
+  transform: translateX(-50%);
+  gap: 5px;
 `;
 
 export const FilterColumn = styled.div`
   display: flex;
   flex-direction: column;
-
+  grid-template-columns: repeat(2, 1fr);
   gap: 10px; /* Espaçamento entre os itens do filtro */
   padding: 5px;
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  position: relative;
+  position: absolute;
   top: -600px;
   left: 235px;
 `;

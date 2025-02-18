@@ -4,13 +4,11 @@ import PropTypes from 'prop-types';
 export const TypeFilterContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
   position: relative;
-  wrap: wrap;
 `;
 
 export const TypeButton = styled.button`
-  padding: 10px;
+  padding: 9px;
   background-color: ${({ selected }) => (selected ? '#007bff' : '#f0f0f0')};
   color: ${({ selected }) => (selected ? '#fff' : '#000')};
   border: none;

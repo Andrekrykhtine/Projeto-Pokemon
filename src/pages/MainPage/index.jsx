@@ -51,10 +51,7 @@ const MainPage = () => {
             selectedType={selectedType} // Passa o tipo selecionado
           />
         </ListPokemonWrapper>
-      </PokedexContainer>
-      <ThemeButtonWrapper>
-        <ThemeTogglerButton />
-      </ThemeButtonWrapper>
+    
      <FilterColumn>
       <TypeFilter
         types={pokemonTypes} // Passa a lista de tipos
@@ -71,6 +68,10 @@ const MainPage = () => {
           Mostrar Todos
         </Button>
       </ButtonsContainer>
+      </PokedexContainer>
+      <ThemeButtonWrapper>
+        <ThemeTogglerButton />
+      </ThemeButtonWrapper>
     </Section>
   );
 };
