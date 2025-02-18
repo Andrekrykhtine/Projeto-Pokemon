@@ -5,6 +5,7 @@ export const TypeFilterContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
+  gap: 0.5px;
 `;
 
 export const TypeButton = styled.button`

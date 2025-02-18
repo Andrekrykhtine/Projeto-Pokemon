@@ -30,6 +30,10 @@ export const PokedexImg = styled.img`
   position: absolute;
   top: 0;
   left: 0;
+    @media (max-width: 1000px) {
+    height: 120%; 
+  }
+
 `;
 
 // Wrapper da lista de Pokémon posicionado de forma responsiva
@@ -63,7 +67,7 @@ export const ButtonsContainer = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
-  top: 510px; 
+  top: 92%; 
   left: 51%;
   transform: translateX(-50%);
   gap: 5px;
@@ -75,12 +79,11 @@ export const FilterColumn = styled.div`
   grid-template-columns: repeat(2, 1fr);
   gap: 10px; /* Espaçamento entre os itens do filtro */
   padding: 5px;
-  background-color: #ffffff;
+  background-color:#fc3535;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: absolute;
-  top: -600px;
-  left: 235px;
+  left: 245px;
 `;
 
 
