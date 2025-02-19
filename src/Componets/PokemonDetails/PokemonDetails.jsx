@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import { StyledCard, StyledHeader, StyledSection } from './style';
 import { pokemonTypes } from '../../services/pokemonTypes';
 
 const PokemonDetails = ({ pokemon }) => {
@@ -54,57 +54,6 @@ const PokemonDetails = ({ pokemon }) => {
   );
 };
 
-// Estilização do Card
-const StyledCard = styled.div`
-  text-align: center;
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  background-color: #f9f9f9; /* Cor padrão */
-  color: #fff; /* Texto branco para contraste */
-  max-width: 400px;
-  margin: 0 auto;
-
-  h1 {
-    font-size: 1.8rem;
-    margin-bottom: 10px;
-    color: #fff;
-  }
-
-  img {
-    width: 150px;
-    height: 150px;
-    margin-bottom: 20px;
-  }
-`;
-
-const StyledHeader = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
-
-const StyledSection = styled.div`
-  margin-top: 15px;
-
-  h2 {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-    color: #fff;
-  }
-
-  ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  li {
-    margin: 5px 0;
-    font-size: 1rem;
-    color: #fff;
-  }
-`;
 
 PokemonDetails.propTypes = {
   pokemon: PropTypes.shape({

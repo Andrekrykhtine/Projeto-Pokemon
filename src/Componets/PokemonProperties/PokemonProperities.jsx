@@ -1,10 +1,11 @@
 // PokemonProperties.js
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+import { Container, BackButton } from './style';
 import { fetchPokemonData } from '../../services/utils';
 import NavigationButtons from '../NavigationButtons/NavigationButtons';
 import PokemonDetails from '../PokemonDetails/PokemonDetails';
+import { TbPokeball } from "react-icons/tb";
 
 const PokemonProperties = () => {
   const { id } = useParams(); // Pegando o ID da URL
@@ -52,8 +53,8 @@ const PokemonProperties = () => {
 
   return (
     <Container>
-      <BackButton onClick={handleBackToMainPage}>Voltar para a Página Principal</BackButton>
-      {/* Componente de Navegação */}
+      <BackButton onClick={handleBackToMainPage}><TbPokeball /></BackButton>
+  
       <NavigationButtons
         onPrevious={handlePrevious}
         onNext={handleNext}
@@ -61,30 +62,11 @@ const PokemonProperties = () => {
         isNextDisabled={parseInt(id) === 700}
       />
 
-      {/* Componente de Detalhes do Pokémon */}
       <PokemonDetails pokemon={pokemon} />
     </Container>
   );
 };
 
-const Container = styled.div`
-  text-align: center;
-  padding: 20px;
-  `;
 
-const BackButton = styled.button`
-  background-color: #6c757d; /* Cinza */
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-bottom: 20px;
-  transition: background-color 0.3s;
-
-  &:hover {
-    background-color: #5a6268; /* Escurece o cinza */
-  }
-`;
 
 export default PokemonProperties;
