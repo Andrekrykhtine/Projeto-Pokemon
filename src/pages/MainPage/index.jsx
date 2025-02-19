@@ -1,7 +1,6 @@
 import { useState,useContext } from 'react';
 import ListPokemon from '../../Componets/ListPokemon/ListPokemon';
 import { ThemeTogglerButton } from '../../Componets/themeTogglerButton/themeTogglerButton';
-
 import pokedex from '../../assets/images/pokedexsemfundo.png'
 import { Section, ListPokemonWrapper, PokedexContainer, ThemeButtonWrapper, ButtonsContainer, FilterColumn ,PokedexImg} from './style';
 import {getId}from '../../services/utils'
