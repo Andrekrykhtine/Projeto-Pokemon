@@ -1,5 +1,5 @@
 
-import styled from 'styled-components';
+import { Message } from "./style";
 
 const LimitReachedMessage = () => {
   return (
@@ -9,11 +9,6 @@ const LimitReachedMessage = () => {
   );
 };
 
-const Message = styled.div`
-  text-align: center;
-  color: red;
-  font-weight: bold;
-  margin: 20px 0;
-`;
+
 
 export default LimitReachedMessage;
