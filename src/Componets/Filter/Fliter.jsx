@@ -1,27 +1,5 @@
-import styled from 'styled-components';
+import { TypeFilterContainer, TypeButton } from './style';
 import PropTypes from 'prop-types';
-
-export const TypeFilterContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  gap: 0.5px;
-`;
-
-export const TypeButton = styled.button`
-  padding: 9px;
-  background-color: ${({ selected }) => (selected ? '#007bff' : '#f0f0f0')};
-  color: ${({ selected }) => (selected ? '#fff' : '#000')};
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
-  text-align: left;
-
-  &:hover {
-    background-color: ${({ selected }) => (selected ? '#0056b3' : '#ddd')};
-  }
-`;
 
 const TypeFilter = ({ types, selectedType, onSelectType }) => {
   return (

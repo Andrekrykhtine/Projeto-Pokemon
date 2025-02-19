@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Buttons = styled.button`
-  padding: 9px 18px;
+  padding: 9px 15px;
   font-size: 0.6rem;
   background-color: ${({ theme }) => theme.backgroundColor};
   color: ${({ theme }) => theme.color};

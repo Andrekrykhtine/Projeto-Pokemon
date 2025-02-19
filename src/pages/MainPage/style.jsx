@@ -70,7 +70,7 @@ export const ButtonsContainer = styled.div`
   top: 92%; 
   left: 51%;
   transform: translateX(-50%);
-  gap: 5px;
+  gap: 2px;
 `;
 
 export const FilterColumn = styled.div`

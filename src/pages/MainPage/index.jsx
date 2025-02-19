@@ -39,8 +39,8 @@ const MainPage = () => {
     <Section style={{ backgroundColor: theme.backgroundColor, color: theme.color }}>
       <PokedexContainer>
         <PokedexImg src={pokedex} alt="Pokedex" />
+        
         <ListPokemonWrapper>
-          {/* Passe o estado e a função para o ListPokemon */}
           <ListPokemon
             pokemonIds={pokemonIds}
             setPokemonIds={setPokemonIds}
@@ -59,6 +59,7 @@ const MainPage = () => {
         onSelectType={setSelectedType} // Passa a função para atualizar o tipo
       />
       </FilterColumn>
+
       <ButtonsContainer>
         <Button onClick={handleClick} disabled={limitReached || isLoading}>
           {isLoading ? 'Carregando...' : 'Carregar mais...'}
@@ -68,7 +69,9 @@ const MainPage = () => {
           Mostrar Todos
         </Button>
       </ButtonsContainer>
+
       </PokedexContainer>
+
       <ThemeButtonWrapper>
         <ThemeTogglerButton />
       </ThemeButtonWrapper>
