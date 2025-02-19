@@ -1,18 +1,9 @@
-export default {
-  // Define os padrões de busca para arquivos de teste
-  testMatch: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[tj]s?(x)'],
-  
-  // Ignora pastas específicas
-  testPathIgnorePatterns: ['/node_modules/'],
-  
-  // Configura mapeamento de módulos para arquivos CSS/SCSS
+module .exports = {
+  testEnvironment: 'jest-environment-jsdom',
+  setupFilesAfterEnv: ['<rootDir>/.jest/setup-tests.js'],
   moduleNameMapper: {
-    '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
+    '\\.(gif|ttf|eot|svg|png)$': '<rootDir>/.jest/mocks/fileMock.js',
+    '\\.(css|less|sass|scss)$': 'identity-obj-proxy',
   },
   
-  // Extensões de arquivos suportadas
-  moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx', 'json', 'node'],
-  
-  // Configura o ambiente de teste
-  testEnvironment: 'jsdom',
 };

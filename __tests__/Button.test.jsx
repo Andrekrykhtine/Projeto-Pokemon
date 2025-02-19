@@ -1,7 +1,7 @@
 
 import { render, fireEvent } from '@testing-library/react';
 import { describe, it, expect, jest } from '@jest/globals';
-import Button from './Button';
+import Button from '../src/Componets/Button/Button';
 
 describe('Button Component', () => {
     it('renders correctly with default props', () => {
