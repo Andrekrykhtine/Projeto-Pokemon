@@ -61,7 +61,7 @@ const ListPokemon = ({
   return (
     <>
       <Main>
-        <ListContainer style={{ backgroundColor: theme.backgroundColor, color: theme.color }}>
+        <ListContainer >
           {isLoading && <LoadingSpinner />}
            {noPokemonFound ? (
         <NoPokemonMessage>Nenhum Pokémon encontrado desse tipo.</NoPokemonMessage>

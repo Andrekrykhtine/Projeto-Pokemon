@@ -1,4 +1,3 @@
-// utils.js
 export const getId = (quantity, min, max) => {
     if (quantity > max - min + 1) {
       throw new Error("The requested quantity of numbers is greater than the available range.");

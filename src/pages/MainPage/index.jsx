@@ -35,7 +35,7 @@ const MainPage = () => {
   };
 
   return (
-    <Section style={{ backgroundColor: theme.backgroundColor, color: theme.color }}>
+    <Section style={{ backgroundColor: theme.backgroundColor, color: theme.color ,  backgroundImage: theme.backgroundImage }}>
       <PokedexContainer>
         <PokedexImg src={pokedex} alt="Pokedex" />
         

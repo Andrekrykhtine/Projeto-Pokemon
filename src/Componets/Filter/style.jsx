@@ -8,7 +8,7 @@ export const TypeFilterContainer = styled.div`
 `;
 
 export const TypeButton = styled.button`
-  padding: 9px;
+  padding: 2px;
   background-color: ${({ selected }) => (selected ? '#007bff' : '#f0f0f0')};
   color: ${({ selected }) => (selected ? '#fff' : '#000')};
   border: none;

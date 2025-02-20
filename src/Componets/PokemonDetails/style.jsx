@@ -11,7 +11,7 @@ export const StyledCard = styled.div`
   margin: 0 auto;
 
   h1 {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     margin-bottom: 10px;
     color: #fff;
   }

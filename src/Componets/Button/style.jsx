@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const Buttons = styled.button`
-  padding: 9px 15px;
-  font-size: 0.6rem;
+  padding: 6px 11px;
+  font-size: 0.45rem;
   background-color: ${({ theme }) => theme.backgroundColor};
   color: ${({ theme }) => theme.color};
   border: none;
@@ -14,5 +14,9 @@ export const Buttons = styled.button`
   &:hover {
     background-color: ${({ theme, disabled }) =>
       disabled ? theme.backgroundColor : theme.hoverBackgroundColor};
+  }
+
+   @media (max-width: 375px) {
+  
   }
 `;

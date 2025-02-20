@@ -7,7 +7,7 @@ export const StyledThemeButton = styled(Button)`
   right: 1rem;
 
   border-radius: 20px;
-  font-size: 7rem;
+  font-size: 2rem;
   background-color: ${props => 
     props.isDarkMode 
       ? "#2c3e50" // cor para o botão "Modo Claro" 
