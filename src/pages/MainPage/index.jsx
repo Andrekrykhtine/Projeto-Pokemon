@@ -59,6 +59,12 @@ const MainPage = () => {
       />
       </FilterColumn>
 
+      <ThemeButtonWrapper>
+        <ThemeTogglerButton />
+      </ThemeButtonWrapper>
+
+      </PokedexContainer>
+
       <ButtonsContainer>
         <Button onClick={handleClick} disabled={limitReached || isLoading}>
           {isLoading ? 'Carregando...' : 'Carregar mais...'}
@@ -68,12 +74,7 @@ const MainPage = () => {
           Mostrar Todos
         </Button>
       </ButtonsContainer>
-
-      </PokedexContainer>
-
-      <ThemeButtonWrapper>
-        <ThemeTogglerButton />
-      </ThemeButtonWrapper>
+      
     </Section>
   );
 };
