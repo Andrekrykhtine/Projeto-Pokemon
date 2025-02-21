@@ -1,5 +1,6 @@
 import { createContext } from "react";
 import backgroundLight from "../assets/images/image.png";
+import backgroundDark from "../assets/images/Equipe-Rocket.jpg";
 
 export const themes = {
   light: {
@@ -8,6 +9,7 @@ export const themes = {
     color: '#000000'
   },
   dark: {
+    backgroundImage:   `url(${backgroundDark})`,
     backgroundColor: '#000000',
     color: '#ffffff'
   }

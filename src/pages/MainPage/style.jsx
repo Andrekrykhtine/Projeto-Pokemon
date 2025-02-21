@@ -4,16 +4,20 @@ import styled from 'styled-components';
 export const Section = styled.section`
   backgroundImage: ${(props) => props.theme.backgroundImage};
   background-color: ${(props) => props.theme.colors.background};
-
+  background-size: 100vw ; 
+  background-position: left;
+  background-repeat: no-repeat; // Evita repetição da imagem
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   width: 100vw; // Ocupa 100% da largura da tela
   height: 100vh; // Ocupa 100% da altura da tela
+  margin: 0 auto; // Centraliza na tela
   padding: 1rem;
   position: relative;
-  overflow: hidden; 
+  overflow: hidden; // Evita barras de rolagem
+
 `;
 
 // Contêiner da Pokedex que manterá a proporção da imagem
