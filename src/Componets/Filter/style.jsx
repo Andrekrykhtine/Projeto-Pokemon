@@ -20,4 +20,8 @@ export const TypeButton = styled.button`
   &:hover {
     background-color: ${({ selected }) => (selected ? '#0056b3' : '#ddd')};
   }
+  @media (max-width: 400px) {
+    padding: 1.6px;
+    font-size: 0.9rem;
+  }
 `;

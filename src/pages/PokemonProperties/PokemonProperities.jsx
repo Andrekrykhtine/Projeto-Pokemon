@@ -3,10 +3,10 @@ import { useState, useEffect, useContext} from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Container, BackButton } from './style';
 import { fetchPokemonData } from '../../services/utils';
-import NavigationButtons from '../NavigationButtons/NavigationButtons';
-import PokemonDetails from '../PokemonDetails/PokemonDetails';
+import NavigationButtons from '../../Componets/NavigationButtons/NavigationButtons';
+import PokemonDetails from '../../Componets/PokemonDetails/PokemonDetails';
 import { TbPokeball } from "react-icons/tb";
-import { ThemeTogglerButton } from '../themeTogglerButton/themeTogglerButton';
+import { ThemeTogglerButton } from '../../Componets/themeTogglerButton/themeTogglerButton';
 import { ThemeContext } from '../../contexts/ThemeContext';
 
 

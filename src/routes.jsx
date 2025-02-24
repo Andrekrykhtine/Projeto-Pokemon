@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import MainPage from "./pages/MainPage";
-import PokemonProperties from "./Componets/PokemonProperties/PokemonProperities";
+import PokemonProperties from "./pages/PokemonProperties/PokemonProperities";
 
 const AppRoutes = () => {
     return (

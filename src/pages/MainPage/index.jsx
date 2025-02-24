@@ -66,14 +66,15 @@ const MainPage = () => {
         <ThemeTogglerButton />
       </ThemeButtonWrapper>
 
-      </PokedexContainer>
-
       <ButtonsContainer>
         <Button onClick={handleReset}>Resetar Lista</Button>
         <Button onClick={() => setSelectedType(null)} disabled={!selectedType}>
           Mostrar Todos
         </Button>
       </ButtonsContainer>
+      
+      </PokedexContainer>
+
       
     </Section>
   );

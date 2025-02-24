@@ -14,20 +14,27 @@ export const Section = styled.section`
   width: 100vw; 
   height: 100vh; 
   margin: 0 auto;
-  padding: 1rem;
+  padding: 1rem 0;
   position: relative;
   overflow: hidden; // Evita barras de rolagem
+    @media (max-width: 900px) {
+     background-size: 20vw ; 
+  }
+    @media (max-width: 750px) {
+    backgroundImage: none;
+}
 
 `;
 
 // Contêiner da Pokedex que manterá a proporção da imagem
 export const PokedexContainer = styled.div`
-margin-top: 1rem;
   position: relative;
   width: 100%;
-
-  max-width: 26%; // Ajustado para o tamanho da página
-  aspect-ratio: 16 / 9; // Mantenha proporção da imagem
+  max-width: 400px; 
+  aspect-ratio: 16 / 9; 
+    @media (max-width: 400px) {
+     max-width: 320px;
+  }
 `;
 
 // Imagem da Pokedex que ocupa todo o contêiner
@@ -62,8 +69,8 @@ export const ThemeButtonWrapper = styled.div`
   position: absolute;
   top: 17px;
   right: 7px;
-  @media (max-width: 375px) {
-    
+   @media (max-width: 400px) {
+     top: 10px;
   }
 `;
 
@@ -72,8 +79,14 @@ export const ButtonsContainer = styled.div`
   flex-direction: column;
   position: absolute;
   gap: 8px;
-  top: 71%;
-  margin: 10px 0 0 19px
+  top: 495px;
+  left: 126px;    
+  @media (max-width: 400px) {
+     top: 395px;
+     left: 100px; 
+     gap: 5px;
+  }
+ 
 `;
 
 export const FilterColumn = styled.div`
@@ -83,8 +96,8 @@ export const FilterColumn = styled.div`
   border-radius: 10px;
   position: absolute;
   top: 110px;
-  max-height: 310px; /* Reduzido para caber na altura fixa */
-  overflow-y: auto; /* Adiciona barra de rolagem vertical se necessário */
+  max-height: 310px; 
+  overflow-y: auto; 
    scrollbar-width: none;
   -ms-overflow-style: none;
   scroll-behavior: smooth;
@@ -93,7 +106,8 @@ export const FilterColumn = styled.div`
     display: none;
   }
 
-  @media (max-width: 375px) {
-   
+  @media (max-width: 400px) {
+     top: 85px;
+     max-height: 256px; 
   }
 `;

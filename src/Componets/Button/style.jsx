@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Buttons = styled.button`
-  padding: 10px 11px;
+  padding: 10px 23px;
   font-size: 0.59rem;
   background-color: ${({ theme }) => theme.backgroundColor};
   color: ${({ theme }) => theme.color};
@@ -16,7 +16,8 @@ export const Buttons = styled.button`
       disabled ? theme.backgroundColor : theme.hoverBackgroundColor};
   }
 
-   @media (max-width: 375px) {
-  
+   @media (max-width: 400px) {
+  padding: 10px 22px;
+  font-size: 0.45rem;
   }
 `;

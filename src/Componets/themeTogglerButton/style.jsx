@@ -34,4 +34,7 @@ export const StyledThemeButton = styled(Button)`
   &:active {
     transform: translateY(0);
   }
+      @media (max-width: 400px) {
+     font-size: 1.5rem;
+  }
 `;
