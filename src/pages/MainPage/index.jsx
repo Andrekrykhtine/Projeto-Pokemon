@@ -49,6 +49,9 @@ const MainPage = () => {
             setLimitReached={setLimitReached}
             selectedType={selectedType} // Passa o tipo selecionado
           />
+        <Button onClick={handleClick} disabled={limitReached || isLoading}>
+          {isLoading ? 'Carregando...' : 'Carregar mais...'}
+        </Button>
         </ListPokemonWrapper>
     
      <FilterColumn>
@@ -66,9 +69,6 @@ const MainPage = () => {
       </PokedexContainer>
 
       <ButtonsContainer>
-        <Button onClick={handleClick} disabled={limitReached || isLoading}>
-          {isLoading ? 'Carregando...' : 'Carregar mais...'}
-        </Button>
         <Button onClick={handleReset}>Resetar Lista</Button>
         <Button onClick={() => setSelectedType(null)} disabled={!selectedType}>
           Mostrar Todos

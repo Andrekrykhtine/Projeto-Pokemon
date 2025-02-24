@@ -36,6 +36,7 @@ export const Main = styled.main`
   align-items: center; /* Centraliza horizontalmente */
   justify-content: center; /* Centraliza verticalmente (opcional) */
   min-height: 100vh; /* Garante que ocupe toda a altura da tela */
+
 `;
 
 export const ListContainer = styled.div`
@@ -44,6 +45,7 @@ export const ListContainer = styled.div`
   gap: 10px; /* Espaçamento entre os cards */
   justify-content: center; /* Centraliza os cards horizontalmente */
    width: 100%;
+  
  `;
 
  export const NoPokemonMessage = styled.div`

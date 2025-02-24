@@ -4,7 +4,7 @@ export const TypeFilterContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  gap: 0.5px;
+  gap: 1px;
 `;
 
 export const TypeButton = styled.button`
@@ -14,7 +14,7 @@ export const TypeButton = styled.button`
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   text-align: left;
 
   &:hover {

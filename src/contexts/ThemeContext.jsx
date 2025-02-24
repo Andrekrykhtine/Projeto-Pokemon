@@ -1,6 +1,6 @@
 import { createContext } from "react";
-import backgroundLight from "../assets/images/image.png";
-import backgroundDark from "../assets/images/Equipe-Rocket.jpg";
+import backgroundLight from "../assets/images/pikachu.png";
+import backgroundDark from "../assets/images/rocket.png";
 
 export const themes = {
   light: {
