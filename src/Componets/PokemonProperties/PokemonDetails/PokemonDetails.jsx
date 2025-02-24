@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { StyledCard, StyledHeader, StyledSection } from './style';
-import { pokemonTypes } from '../../services/pokemonTypes';
+import { pokemonTypes } from '../../../services/pokemonTypes';
 
 const PokemonDetails = ({ pokemon }) => {
   if (!pokemon) return null;

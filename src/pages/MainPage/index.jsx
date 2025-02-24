@@ -1,11 +1,11 @@
 import { useState,useContext } from 'react';
-import ListPokemon from '../../Componets/ListPokemon/ListPokemon';
+import ListPokemon from '../../Componets/MainPage/ListPokemon/ListPokemon';
 import { ThemeTogglerButton } from '../../Componets/themeTogglerButton/themeTogglerButton';
 import pokedex from '../../assets/images/pokedexsemfundo.png'
 import { Section, ListPokemonWrapper, PokedexContainer, ThemeButtonWrapper, ButtonsContainer, FilterColumn ,PokedexImg} from './style';
 import {getId}from '../../services/utils'
 import {Button} from '../../Componets/Button/Button'
-import TypeFilter from '../../Componets/Filter/Fliter'
+import TypeFilter from '../../Componets/MainPage/Filter/Fliter'
 import {pokemonTypes} from '../../services/pokemonTypes'
 import { ThemeContext } from '../../contexts/ThemeContext';
 
