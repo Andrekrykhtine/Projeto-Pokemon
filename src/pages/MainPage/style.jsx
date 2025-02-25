@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 // Contêiner principal responsivo
 export const Section = styled.section`
-  backgroundImage: ${(props) => props.theme.backgroundImage};
+  background-image: ${(props) => props.theme.backgroundImage};
   background-color: ${(props) => props.theme.colors.background};
   background-size: 25vw ; 
   background-position: 5% 80% ;
@@ -48,6 +48,7 @@ export const PokedexImg = styled.img`
 // Wrapper da lista de Pokémon posicionado de forma responsiva
 export const ListPokemonWrapper = styled.div`
   position: absolute;
+  gap: 1rem;
   top: 50.6%; 
   left: 49.9%; 
   width: 80%; 
@@ -67,10 +68,10 @@ export const ListPokemonWrapper = styled.div`
 // Botão do tema posicionado de forma responsiva
 export const ThemeButtonWrapper = styled.div`
   position: absolute;
-  top: 17px;
+  top: 10px;
   right: 7px;
    @media (max-width: 400px) {
-     top: 10px;
+     top: 4px;
   }
 `;
 
@@ -78,15 +79,12 @@ export const ButtonsContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: absolute;
-  gap: 8px;
-  top: 495px;
-  left: 126px;    
+  top: 485px;
+  left: 125px;    
   @media (max-width: 400px) {
-     top: 395px;
-     left: 100px; 
-     gap: 5px;
+     top: 380px;
+     left: 98px; 
   }
- 
 `;
 
 export const FilterColumn = styled.div`

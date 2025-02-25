@@ -5,7 +5,7 @@ export const StyledThemeButton = styled(Button)`
   position: absolute;
   top: 1rem;
   right: 1rem;
-
+  padding: 10px 12px;
   border-radius: 20px;
   font-size: 2.5rem;
   background-color: ${props => 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useContext, useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { ListContainer, Main , NoPokemonMessage } from './style';
-import PokemonCard from '../../PokemonProperties/PokemonCard/PokemonCard';
+import PokemonCard from '../PokemonCard/PokemonCard';
 import { getId, fetchPokemonData } from '../../../services/utils';
 import LimitReachedMessage from '../LimitReachedMessage/LimitReachedMessage';
 import { ThemeContext } from '../../../contexts/ThemeContext';

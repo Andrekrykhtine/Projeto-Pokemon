@@ -5,12 +5,12 @@ import backgroundDark from "../assets/images/rocket.png";
 export const themes = {
   light: {
     backgroundImage:   `url(${backgroundLight})`,
-    backgroundColor: '#eeeeee',
-    color: '#000000'
+    backgroundColor: '#fdf57e',
+    color: '#000001'
   },
   dark: {
     backgroundImage:   `url(${backgroundDark})`,
-    backgroundColor: '#000000',
+    backgroundColor: '#361735',
     color: '#ffffff'
   }
 };

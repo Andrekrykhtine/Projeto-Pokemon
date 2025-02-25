@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Spinner = styled.div`
+export const Spinner = styled.div`
   border: 4px solid rgba(0, 0, 0, 0.1);
   border-left-color: #09f;
   border-radius: 50%;
