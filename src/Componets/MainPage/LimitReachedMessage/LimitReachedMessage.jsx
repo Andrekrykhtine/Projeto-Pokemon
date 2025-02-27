@@ -1,4 +1,3 @@
-
 import { Message } from "./style";
 
 const LimitReachedMessage = () => {

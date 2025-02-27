@@ -1,4 +1,3 @@
-// NavigationButtons.js
 import { Navigation, ArrowButton } from './style';
 import PropTypes from 'prop-types';
 import { ImArrowRight } from "react-icons/im";

@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-
-// Contêiner principal responsivo
 export const Section = styled.section`
   background-image: ${(props) => props.theme.backgroundImage};
   background-color: ${(props) => props.theme.colors.background};
