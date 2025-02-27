@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+
 // Contêiner principal responsivo
 export const Section = styled.section`
   background-image: ${(props) => props.theme.backgroundImage};
@@ -32,8 +33,11 @@ export const PokedexContainer = styled.div`
   width: 100%;
   max-width: 400px; 
   aspect-ratio: 16 / 9; 
+  background-color:${(props) => props.theme.backgroundList};
+
     @media (max-width: 400px) {
      max-width: 320px;
+
   }
 `;
 
@@ -51,13 +55,14 @@ export const ListPokemonWrapper = styled.div`
   gap: 1rem;
   top: 50.6%; 
   left: 49.9%; 
-  width: 80%; 
+  width: 81.3%; 
   height: 137%; 
   transform: translateX(-50%); 
   overflow-y: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
   scroll-behavior: smooth;
+  background-color:${(props) => props.theme.backgroundList};
 
   &::-webkit-scrollbar {
     display: none;

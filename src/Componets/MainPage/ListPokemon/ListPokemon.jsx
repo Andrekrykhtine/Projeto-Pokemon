@@ -2,11 +2,10 @@
 import PropTypes from 'prop-types';
 import { useContext, useEffect } from 'react';
 import { useQuery } from 'react-query';
-import { ListContainer, Main , NoPokemonMessage } from './style';
+import { ListContainer, NoPokemonMessage } from './style';
 import PokemonCard from '../PokemonCard/PokemonCard';
 import { getId, fetchPokemonData } from '../../../services/utils';
 import LimitReachedMessage from '../LimitReachedMessage/LimitReachedMessage';
-import { ThemeContext } from '../../../contexts/ThemeContext';
 import LoadingSpinner from '../LoadingSpiner/LoadingSpiner';
 
 const ListPokemon = ({
@@ -18,7 +17,7 @@ const ListPokemon = ({
   setLimitReached,
   selectedType, 
 }) => {
-  const { theme } = useContext(ThemeContext);
+ 
 
   // Initialize with 10 Pokémon when component first loads
   useEffect(() => {
@@ -60,7 +59,7 @@ const ListPokemon = ({
 
   return (
     <>
-      <Main>
+    
         <ListContainer >
           {isLoading && <LoadingSpinner />}
            {noPokemonFound ? (
@@ -72,7 +71,7 @@ const ListPokemon = ({
       )}
         </ListContainer>
         {limitReached && <LimitReachedMessage />}
-      </Main>
+     
     </>
   );
 };

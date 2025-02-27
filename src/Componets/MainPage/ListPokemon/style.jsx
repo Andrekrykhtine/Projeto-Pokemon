@@ -4,6 +4,7 @@ export const ListCard = styled.li`
 display: flex;
 align-items: center;    
 justify-content: space-between;
+
 `;
 
 export const Card = styled.a`
@@ -27,15 +28,6 @@ transition: background-color 0.2s;
 export const LimitReached = styled.p`
 color: ${(props) => props.theme.colors.red};
 font-weight: 700;
-
-`;
-
-export const Main = styled.main`
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Centraliza horizontalmente */
-  justify-content: center; /* Centraliza verticalmente (opcional) */
-  min-height: 100vh; /* Garante que ocupe toda a altura da tela */
 `;
 
 export const ListContainer = styled.div`

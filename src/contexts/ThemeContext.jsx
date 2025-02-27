@@ -6,11 +6,13 @@ export const themes = {
   light: {
     backgroundImage:   `url(${backgroundLight})`,
     backgroundColor: '#fdf57e',
+    backgroundList: '#fffff5',
     color: '#000001'
   },
   dark: {
     backgroundImage:   `url(${backgroundDark})`,
     backgroundColor: '#361735',
+    backgroundList: '#000001',
     color: '#ffffff'
   }
 };
