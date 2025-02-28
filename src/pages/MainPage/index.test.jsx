@@ -2,6 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import MainPage from './index';
 import { ThemeContext } from '../../contexts/ThemeContext';
 import { getId } from '../../services/utils';
+import { vi, describe, it, expect, beforeEach } from 'vitest';
 
 // Mock do tema com a estrutura correta
 const mockTheme = {
@@ -13,14 +14,14 @@ const mockTheme = {
 };
 
 // Mock da função getId
-jest.mock('../../services/utils', () => ({
-  getId: jest.fn(),
+vi.mock('../../services/utils', () => ({
+  getId: vi.fn(),
 }));
 
 describe('MainPage', () => {
   beforeEach(() => {
     // Resetar mocks antes de cada teste
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('renders correctly', () => {

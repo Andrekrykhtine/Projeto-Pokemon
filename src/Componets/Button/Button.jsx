@@ -1,24 +1,23 @@
 import { useContext } from "react";
-import { Buttons} from "./style";
+import { Buttons } from "./style";
 import PropTypes from 'prop-types';
 import { ThemeContext } from "../../contexts/ThemeContext";
 
- export const Button = ({
-    onClick, 
-    disabled = false, 
-    type = 'button', 
+export const Button = ({
+    onClick,
+    disabled = false,
+    type = 'button',
     children,
-    ...rest 
-    
+    ...rest
 }) => {
-    const {theme} = useContext(ThemeContext)
+    const { theme } = useContext(ThemeContext);
 
     return (
         <Buttons
             onClick={onClick}
             disabled={disabled}
             type={type}
-            theme={theme} 
+            theme={theme}
             {...rest}
         >
             {children}

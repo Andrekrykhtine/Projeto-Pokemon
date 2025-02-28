@@ -4,8 +4,8 @@ export const Buttons = styled.button`
   padding: 10px 23px;
   margin-top: 8px;
   font-size: 0.59rem;
-  background-color: ${({ theme }) => theme.backgroundColor};
-  color: ${({ theme }) => theme.color};
+  background-color: ${(props) => props.theme.backgroundColor};
+  color:  ${(props) => props.theme.color};
   border-radius: 5px;
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
   opacity: ${({ disabled }) => (disabled ? 0.6 : 1)};
@@ -21,3 +21,6 @@ export const Buttons = styled.button`
   font-size: 0.45rem;
   }
 `;
+
+
+

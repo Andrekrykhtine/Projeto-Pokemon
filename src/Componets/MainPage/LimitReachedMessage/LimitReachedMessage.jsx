@@ -2,7 +2,7 @@ import { Message } from "./style";
 
 const LimitReachedMessage = () => {
   return (
-    <Message>
+    <Message data-testid="limit-reached-message">
       Limite de 100 Pokémon atingido!
     </Message>
   );
