@@ -1,4 +1,4 @@
-import { Button } from "../Button/Button";
+import { Button } from "../UI/Button/Button";
 import styled from "styled-components";
 
 export const StyledThemeButton = styled(Button)`
