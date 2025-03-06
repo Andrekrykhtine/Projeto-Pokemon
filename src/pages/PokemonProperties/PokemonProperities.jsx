@@ -70,7 +70,7 @@ const PokemonProperties = () => {
   if (error) return <p>Erro: {error}</p>;
 
   return (
-    <Container style={{ backgroundColor: theme.backgroundColor, color: theme.color }}>
+    <Container theme={theme}>
       <ThemeTogglerButton />
       <BackButton onClick={handleBackToMainPage}>HOME <TbPokeball /></BackButton>
 

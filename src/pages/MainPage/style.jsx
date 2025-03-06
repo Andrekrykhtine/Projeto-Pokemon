@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Section = styled.section`
   background-image: ${(props) => props.theme.backgroundImage};
-  background-color: ${(props) => props.theme.colors.background};
+  background-color:${(props) => props.theme.backgroundColor};
   background-size: 25vw ; 
   background-position: 5% 80% ;
   background-repeat: no-repeat; 

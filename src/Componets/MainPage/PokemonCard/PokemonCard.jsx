@@ -14,7 +14,8 @@ const PokemonCard = ({ pokemon }) => {
                     alt={`Imagem do ${pokemon.name}`}
                 />
             )}
-            <p>{pokemon.name}</p>
+           <p data-testid="pokemon-name">{pokemon.name}</p>
+
         </Card>
     );
 };

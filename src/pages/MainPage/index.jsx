@@ -35,11 +35,11 @@ const MainPage = () => {
   };
 
   return (
-    <Section style={{ backgroundColor: theme.backgroundColor, color: theme.color ,  backgroundImage: theme.backgroundImage }}>
-      <PokedexContainer style={{ backgroundColor: theme.backgroundList }}>
+    <Section theme={theme}>
+      <PokedexContainer theme={theme}>
         <PokedexImg src={pokedex} alt="Pokedex" />
         
-        <ListPokemonWrapper style={{ backgroundColor: theme.backgroundList }}>
+        <ListPokemonWrapper theme={theme}>
           <ListPokemon
             pokemonIds={pokemonIds}
             setPokemonIds={setPokemonIds}

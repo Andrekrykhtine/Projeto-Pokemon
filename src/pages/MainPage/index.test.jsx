@@ -1,123 +1,105 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import MainPage from './index';
 import { ThemeContext } from '../../contexts/ThemeContext';
 import { getId } from '../../services/utils';
-import { vi, describe, it, expect, beforeEach } from 'vitest';
+import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
-// Mock do tema com a estrutura correta
 const mockTheme = {
-  colors: {
-    background: '#fff', // Cor de fundo
-    text: '#000', // Cor do texto
-  },
-  backgroundImage: 'none', // Imagem de fundo
+    colors: {
+        background: '#fff',
+        text: '#000',
+    },
+    backgroundImage: 'none',
 };
 
-// Mock da função getId
 vi.mock('../../services/utils', () => ({
-  getId: vi.fn(),
+    getId: vi.fn(),
 }));
 
 describe('MainPage', () => {
-  beforeEach(() => {
-    // Resetar mocks antes de cada teste
-    vi.clearAllMocks();
-  });
+    let queryClient;
 
-  it('renders correctly', () => {
-    render(
-      <ThemeContext.Provider value={{ theme: mockTheme }}>
-        <MainPage />
-      </ThemeContext.Provider>
-    );
+    beforeEach(() => {
+        queryClient = new QueryClient({
+            defaultOptions: {
+                queries: {
+                    retry: false,
+                    refetchOnMount: false,
+                    refetchOnWindowFocus: false,
+                    refetchOnReconnect: false
+                },
+            },
+        });
+        vi.clearAllMocks();
+    });
+    afterEach(() => {
+        vi.resetAllMocks();
+    });
 
-    // Verifica se os elementos estão presentes
-    expect(screen.getByText('Carregar mais...')).toBeInTheDocument();
-    expect(screen.getByText('Resetar Lista')).toBeInTheDocument();
-    expect(screen.getByText('Mostrar Todos')).toBeInTheDocument();
-  });
+    const renderComponent = () => {
+        return render(
+            <QueryClientProvider client={queryClient}>
+                <ThemeContext.Provider value={{ theme: mockTheme }}>
+                    <MainPage />
+                </ThemeContext.Provider>
+            </QueryClientProvider>
+        );
+    }
 
-  it('handles "Carregar mais..." button click', () => {
-    // Mock da função getId para retornar uma lista de IDs
-    getId.mockReturnValue([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+    it('renders correctly', () => {
+        renderComponent();
+        expect(screen.getByText('Carregar mais...')).toBeInTheDocument();
+        expect(screen.getByText('Resetar Lista')).toBeInTheDocument();
+        expect(screen.getByText('Mostrar Todos')).toBeInTheDocument();
+    });
 
-    render(
-      <ThemeContext.Provider value={{ theme: mockTheme }}>
-        <MainPage />
-      </ThemeContext.Provider>
-    );
+    it('handles "Carregar mais..." button click', async () => {
+        getId.mockReturnValue([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+        renderComponent();
+        const loadMoreButton = screen.getByText('Carregar mais...');
+        fireEvent.click(loadMoreButton);
+        await waitFor(() => {
+            expect(getId).toHaveBeenCalledWith(10, 1, 700);
+        });
+    });
 
-    // Simula o clique no botão "Carregar mais..."
-    const loadMoreButton = screen.getByText('Carregar mais...');
-    fireEvent.click(loadMoreButton);
+    it('disables "Carregar mais..." button when limit is reached', async () => {
+        getId.mockReturnValue(Array.from({ length: 100 }, (_, i) => i + 1));
+        renderComponent();
+        const loadMoreButton = screen.getByText('Carregar mais...');
+        fireEvent.click(loadMoreButton);
 
-    // Verifica se a função getId foi chamada
-    expect(getId).toHaveBeenCalledWith(10, 1, 700);
-  });
+        await waitFor(() => {
+            expect(loadMoreButton).toBeDisabled();
+        });
+    });
 
-  it('disables "Carregar mais..." button when limit is reached', () => {
-    // Mock da função getId para retornar uma lista de IDs
-    getId.mockReturnValue(Array.from({ length: 100 }, (_, i) => i + 1));
+    it('handles "Resetar Lista" button click', async () => {
+        getId.mockReturnValue([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+        renderComponent();
+        const resetButton = screen.getByText('Resetar Lista');
+        fireEvent.click(resetButton);
+        await waitFor(() => {
+            expect(getId).toHaveBeenCalledWith(10, 1, 700);
+        });
+    });
 
-    render(
-      <ThemeContext.Provider value={{ theme: mockTheme }}>
-        <MainPage />
-      </ThemeContext.Provider>
-    );
+    it('handles type selection in TypeFilter', async () => {
+        renderComponent();
+        const typeFilter = screen.getByLabelText('Filtrar por tipo');
+        fireEvent.change(typeFilter, { target: { value: 'fire' } });
+        await waitFor(() => {
+            expect(screen.getByDisplayValue('fire')).toBeInTheDocument();
+        });
+    });
 
-    // Simula o clique no botão "Carregar mais..."
-    const loadMoreButton = screen.getByText('Carregar mais...');
-    fireEvent.click(loadMoreButton);
-
-    // Verifica se o botão está desabilitado
-    expect(loadMoreButton).toBeDisabled();
-  });
-
-  it('handles "Resetar Lista" button click', () => {
-    // Mock da função getId para retornar uma lista de IDs
-    getId.mockReturnValue([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
-
-    render(
-      <ThemeContext.Provider value={{ theme: mockTheme }}>
-        <MainPage />
-      </ThemeContext.Provider>
-    );
-
-    // Simula o clique no botão "Resetar Lista"
-    const resetButton = screen.getByText('Resetar Lista');
-    fireEvent.click(resetButton);
-
-    // Verifica se a função getId foi chamada
-    expect(getId).toHaveBeenCalledWith(10, 1, 700);
-  });
-
-  it('handles type selection in TypeFilter', () => {
-    render(
-      <ThemeContext.Provider value={{ theme: mockTheme }}>
-        <MainPage />
-      </ThemeContext.Provider>
-    );
-
-    // Simula a seleção de um tipo no filtro
-    const typeFilter = screen.getByLabelText('Filtrar por tipo'); // Ajuste o label conforme necessário
-    fireEvent.change(typeFilter, { target: { value: 'fire' } });
-
-    // Verifica se o tipo selecionado foi atualizado
-    expect(screen.getByDisplayValue('fire')).toBeInTheDocument();
-  });
-
-  it('handles "Mostrar Todos" button click', () => {
-    render(
-      <ThemeContext.Provider value={{ theme: mockTheme }}>
-        <MainPage />
-      </ThemeContext.Provider>
-    );
-
-    // Simula o clique no botão "Mostrar Todos"
-    const showAllButton = screen.getByText('Mostrar Todos');
-    fireEvent.click(showAllButton);
-
-    // Verifica se o tipo selecionado foi resetado
-    expect(screen.getByText('Mostrar Todos')).toBeDisabled(); // O botão deve estar desabilitado se nenhum tipo estiver selecionado
-  });
+    it('handles "Mostrar Todos" button click', async () => {
+        renderComponent();
+        const showAllButton = screen.getByText('Mostrar Todos');
+        fireEvent.click(showAllButton);
+        await waitFor(() => {
+            expect(showAllButton).toBeDisabled();
+        });
+    });
 });
