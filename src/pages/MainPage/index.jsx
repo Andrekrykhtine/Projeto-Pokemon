@@ -4,7 +4,7 @@ import { ThemeTogglerButton } from '../../Componets/themeTogglerButton/themeTogg
 import pokedex from '../../assets/images/pokedexsemfundo.png'
 import { Section, ListPokemonWrapper, PokedexContainer, ThemeButtonWrapper, ButtonsContainer, FilterColumn ,PokedexImg} from './style';
 import {getId}from '../../services/utils'
-import {Button} from '../../Componets/Button/Button'
+import {Button} from '../../Componets/UI/Button/Button'
 import TypeFilter from '../../Componets/MainPage/Filter/Fliter'
 import {pokemonTypes} from '../../services/pokemonTypes'
 import { ThemeContext } from '../../contexts/ThemeContext';

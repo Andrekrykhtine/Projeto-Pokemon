@@ -1,12 +1,13 @@
-
 import PropTypes from 'prop-types';
-import { useContext, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { ListContainer, NoPokemonMessage } from './style';
 import PokemonCard from '../PokemonCard/PokemonCard';
 import { getId, fetchPokemonData } from '../../../services/utils';
 import LimitReachedMessage from '../LimitReachedMessage/LimitReachedMessage';
-import LoadingSpinner from '../LoadingSpiner/LoadingSpiner';
+import LoadingSpinner from '../../UI/LoadingSpiner/LoadingSpiner';
+import { usePokemonData } from '../../../hooks/usePokemonData'; 
+
 
 const ListPokemon = ({
   pokemonIds,
@@ -15,9 +16,10 @@ const ListPokemon = ({
   setAllPokemonData,
   limitReached,
   setLimitReached,
-  selectedType, 
+  selectedType,
 }) => {
- 
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const { loadMorePokemon } = usePokemonData({ pokemonIds, setPokemonIds, setLimitReached }); // Usando o hook
 
   // Initialize with 10 Pokémon when component first loads
   useEffect(() => {
@@ -25,27 +27,35 @@ const ListPokemon = ({
     setPokemonIds(initialIds);
   }, [setPokemonIds]);
 
-  const { isError, error, isLoading } = useQuery(
+  const { isError, error, isLoading, data } = useQuery(
     ['pokemons', pokemonIds],
     async () => {
       const newData = await Promise.all(pokemonIds.map(id => fetchPokemonData(id)));
-      const filteredData = newData.filter(
-        (newPokemon) => !allPokemonData.some((existingPokemon) => existingPokemon.id === newPokemon.id)
-      );
-      setAllPokemonData((prevData) => {
-        const updatedData = [...prevData, ...filteredData];
-        if (updatedData.length >= 100) {
-          setLimitReached(true);
-        }
-        return updatedData;
-      });
-      return filteredData;
+      
+      return newData;
     },
     {
       enabled: pokemonIds.length > 0,
       refetchOnWindowFocus: false,
     }
   );
+  
+    useEffect(() => {
+        if (data) {
+            const filteredData = data.filter(
+                (newPokemon) => !allPokemonData.some((existingPokemon) => existingPokemon.id === newPokemon.id)
+            );
+             setAllPokemonData((prevData) => {
+                 const updatedData = [...prevData, ...filteredData];
+                 if (updatedData.length >= 100) {
+                     setLimitReached(true);
+                 }
+                 return updatedData;
+             });
+          setIsLoadingMore(false);
+        }
+    }, [data, allPokemonData, setAllPokemonData, setLimitReached]);
+  
 
   // Filtra os Pokémon pelo tipo selecionado
   const filteredPokemon = selectedType
@@ -54,24 +64,30 @@ const ListPokemon = ({
 
   if (isError) return <p>Erro: {error.message}</p>;
 
-   // Verifica se há Pokémon correspondentes ao tipo selecionado
-   const noPokemonFound = selectedType && filteredPokemon.length === 0;
+  // Verifica se há Pokémon correspondentes ao tipo selecionado ou se não há nenhum Pokémon carregado
+  const noPokemonFound = (selectedType && filteredPokemon.length === 0) || (!isLoading && filteredPokemon.length === 0);
 
   return (
     <>
-    
         <ListContainer >
-          {isLoading && <LoadingSpinner />}
+          {(isLoading || isLoadingMore) && <LoadingSpinner />}
            {noPokemonFound ? (
-        <NoPokemonMessage>Nenhum Pokémon encontrado desse tipo.</NoPokemonMessage>
+        <NoPokemonMessage>
+           {selectedType ? 'Nenhum Pokémon encontrado desse tipo.' : "Nenhum Pokemon encontrado ainda"}
+           </NoPokemonMessage>
       ) : (
         filteredPokemon.map(pokemon => (
           <PokemonCard key={pokemon.id} pokemon={pokemon} />
         ))
       )}
+      {
+          !limitReached && filteredPokemon.length > 0 && !isLoading && !isLoadingMore && <button onClick={() => {
+            setIsLoadingMore(true);
+            loadMorePokemon();
+          }}>Carregar Mais</button>
+        }
         </ListContainer>
         {limitReached && <LimitReachedMessage />}
-     
     </>
   );
 };
@@ -85,7 +101,6 @@ ListPokemon.propTypes = {
   limitReached: PropTypes.bool.isRequired,
   setLimitReached: PropTypes.func.isRequired,
   selectedType: PropTypes.string,
-  setSelectedType: PropTypes.func.isRequired,
 };
 
 export default ListPokemon;
