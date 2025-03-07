@@ -1,9 +1,7 @@
 import { getId } from '../services/utils';
-
 import { useCallback } from 'react';
 
 export const usePokemonData = ({
-    pokemonIds,
     setPokemonIds,
     setLimitReached
 }) => {

@@ -1,12 +1,13 @@
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
-import { useQuery } from 'react-query';
+import { useState, useEffect } from 'react';
 import { ListContainer, NoPokemonMessage } from './style';
 import PokemonCard from '../PokemonCard/PokemonCard';
-import { getId, fetchPokemonData } from '../../../services/utils';
 import LimitReachedMessage from '../LimitReachedMessage/LimitReachedMessage';
 import LoadingSpinner from '../../UI/LoadingSpiner/LoadingSpiner';
-import { usePokemonData } from '../../../hooks/usePokemonData'; // Importando o hook personalizado
+import { useFetchPokemonData } from '../../../hooks/useFetchPokemonData';
+import { usePokemonData } from '../../../hooks/usePokemonData';
+import { usePokemonFilter } from '../../../hooks/usePokemonFilter';
+import { usePokemonInitializer } from '../../../hooks/usePokemonInitializer';
 
 const ListPokemon = ({
   pokemonIds,
@@ -18,61 +19,57 @@ const ListPokemon = ({
   selectedType,
 }) => {
   const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const [initialLoad, setInitialLoad] = useState(true);
 
-  // Initialize with 10 Pokémon when component first loads
+  // Inicializa com 10 Pokémon quando o componente carrega pela primeira vez
+  usePokemonInitializer({ setPokemonIds });
+
+  // Hook para buscar dados dos Pokémon
+  const { isError, error, isLoading } = useFetchPokemonData({ 
+    pokemonIds, 
+    allPokemonData, 
+    setAllPokemonData, 
+    setLimitReached 
+  });
+
+  // Hook para filtrar Pokémon por tipo
+  const { filteredPokemon, noPokemonFound } = usePokemonFilter({
+    allPokemonData,
+    selectedType,
+    isLoading: isLoading || initialLoad
+  });
+
+  // Detectar quando o carregamento inicial termina
   useEffect(() => {
-    const initialIds = getId(10, 1, 700);
-    setPokemonIds(initialIds);
-  }, [setPokemonIds]);
-
-  const { isError, error, isLoading, data } = useQuery(
-    ['pokemons', pokemonIds],
-    async () => {
-      const newData = await Promise.all(pokemonIds.map(id => fetchPokemonData(id)));
-      return newData;
-    },
-    {
-      enabled: pokemonIds.length > 0,
-      refetchOnWindowFocus: false,
+    if (allPokemonData.length > 0 && initialLoad) {
+      setInitialLoad(false);
     }
-  );
+  }, [allPokemonData, initialLoad]);
 
+  // Se os dados estiverem vazios e voltarmos para o início, considerar como carregamento inicial novamente
   useEffect(() => {
-    if (data) {
-      const filteredData = data.filter(
-        (newPokemon) => !allPokemonData.some((existingPokemon) => existingPokemon.id === newPokemon.id)
-      );
-      setAllPokemonData((prevData) => {
-        const updatedData = [...prevData, ...filteredData];
-        if (updatedData.length >= 100) {
-          setLimitReached(true);
-        }
-        return updatedData;
-      });
-      setIsLoadingMore(false);
+    if (allPokemonData.length === 0 && !initialLoad) {
+      setInitialLoad(true);
     }
-  }, [data, allPokemonData, setAllPokemonData, setLimitReached]);
-
-  // Filtra os Pokémon pelo tipo selecionado
-  const filteredPokemon = selectedType
-    ? allPokemonData.filter((pokemon) => pokemon.types.some((type) => type.type.name === selectedType))
-    : allPokemonData;
+  }, [allPokemonData, initialLoad]);
 
   if (isError) return <p>Erro: {error.message}</p>;
 
-  // Verifica se há Pokémon correspondentes ao tipo selecionado ou se não há nenhum Pokémon carregado
-  const noPokemonFound = (selectedType && filteredPokemon.length === 0) || (!isLoading && filteredPokemon.length === 0);
+  // Determinar se deve mostrar o spinner ou a lista
+  const showSpinner = isLoading || isLoadingMore || (initialLoad && allPokemonData.length === 0);
+  const showMessage = noPokemonFound && !showSpinner;
 
   return (
     <>
       <ListContainer>
-        {(isLoading || isLoadingMore) && <LoadingSpinner />}
-        {noPokemonFound ? (
+        {showSpinner && <LoadingSpinner />}
+        {showMessage ? (
           <NoPokemonMessage>
             {selectedType ? 'Nenhum Pokémon encontrado desse tipo.' : 'Nenhum Pokemon encontrado ainda'}
           </NoPokemonMessage>
         ) : (
-          filteredPokemon.map((pokemon) => (
+          // Só mostrar a lista se não estiver no carregamento inicial
+          !initialLoad && filteredPokemon.map((pokemon) => (
             <PokemonCard key={pokemon.id} pokemon={pokemon} />
           ))
         )}

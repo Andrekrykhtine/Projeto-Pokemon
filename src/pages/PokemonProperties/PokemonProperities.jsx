@@ -11,54 +11,42 @@ import { ThemeContext } from '../../contexts/ThemeContext';
 const PokemonProperties = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [pokemonData, setPokemonData] = useState({
-    current: null,
-    next: null,
-    previous: null,
-  });
-  const [loading, setLoading] = useState(true);
+  const [pokemonData, setPokemonData] = useState({ current: null, next: null, previous: null });
+  const [loading] = useState(true);
   const [error, setError] = useState(null);
   const { theme } = useContext(ThemeContext);
 
-  const fetchMultiplePokemonData = async (id) => {
+  const fetchPokemonDataById = async (id) => {
     try {
-      setLoading(true);
-
-      const current = await fetchPokemonData(id);
-      const next = parseInt(id) + 1 <= 700 ? await fetchPokemonData(parseInt(id) + 1) : null;
-      const previous = parseInt(id) - 1 >= 1 ? await fetchPokemonData(parseInt(id) - 1) : null;
-
-      setPokemonData({ current, next, previous });
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
+      const data = await fetchPokemonData(id);
+      return data;
+    } catch (error) {
+      setError(error.message);
+      return null;
     }
   };
+
 
   useEffect(() => {
-    fetchMultiplePokemonData(id);
+    const fetchCurrentPokemon = async () => {
+      const currentPokemon = await fetchPokemonDataById(id);
+      setPokemonData({ current: currentPokemon, next: null, previous: null });
+    };
+    fetchCurrentPokemon();
   }, [id]);
 
-  const handleNext = () => {
+
+  const handleNext = async () => {
     const nextId = parseInt(id) + 1;
     if (nextId <= 700) {
-      if (pokemonData.next) {
-        navigate(`/pokemon/${nextId}`);
-      } else {
-        fetchMultiplePokemonData(nextId).then(() => navigate(`/pokemon/${nextId}`));
-      }
+      navigate(`/pokemon/${nextId}`);
     }
   };
 
-  const handlePrevious = () => {
+  const handlePrevious = async () => {
     const previousId = parseInt(id) - 1;
     if (previousId >= 1) {
-      if (pokemonData.previous) {
-        navigate(`/pokemon/${previousId}`);
-      } else {
-        fetchMultiplePokemonData(previousId).then(() => navigate(`/pokemon/${previousId}`));
-      }
+      navigate(`/pokemon/${previousId}`);
     }
   };
 
@@ -68,19 +56,19 @@ const PokemonProperties = () => {
 
   if (loading && !pokemonData.current) return <p>Carregando...</p>;
   if (error) return <p>Erro: {error}</p>;
+  if (!pokemonData.current) return <p>Pokémon não encontrado</p>;
+
 
   return (
     <Container theme={theme}>
       <ThemeTogglerButton />
       <BackButton onClick={handleBackToMainPage}>HOME <TbPokeball /></BackButton>
-
       <NavigationButtons
         onPrevious={handlePrevious}
         onNext={handleNext}
         isPreviousDisabled={parseInt(id) === 1}
         isNextDisabled={parseInt(id) === 700}
       />
-
       {pokemonData.current && <PokemonDetails pokemon={pokemonData.current} />}
     </Container>
   );
