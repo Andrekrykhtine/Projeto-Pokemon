@@ -4,7 +4,6 @@ export const ListCard = styled.li`
 display: flex;
 align-items: center;    
 justify-content: space-between;
-
 `;
 
 export const Card = styled.a`
@@ -33,14 +32,14 @@ font-weight: 700;
 export const ListContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 10px; /* Espaçamento entre os cards */
-  justify-content: center; /* Centraliza os cards horizontalmente */
+  gap: 10px; 
+  justify-content: center;
    width: 100%;
  `;
 
  export const NoPokemonMessage = styled.div`
   font-size: 1rem;
-  color: #000000;
+  color: ${(props) => props.theme.colors.red};
   text-align: center;
 `;
 

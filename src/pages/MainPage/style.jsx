@@ -31,7 +31,7 @@ export const PokedexContainer = styled.div`
   width: 100%;
   max-width: 400px; 
   aspect-ratio: 16 / 9; 
-  background-color:${(props) => props.theme.backgroundList};
+  
 
     @media (max-width: 400px) {
      max-width: 320px;
@@ -51,10 +51,10 @@ export const PokedexImg = styled.img`
 export const ListPokemonWrapper = styled.div`
   position: absolute;
   gap: 1rem;
-  top: 50.6%; 
+  top: 46.5%; 
   left: 49.9%; 
   width: 81.3%; 
-  height: 137%; 
+  height: 142%; 
   transform: translateX(-50%); 
   overflow-y: auto;
   scrollbar-width: none;
