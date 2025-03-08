@@ -41,6 +41,7 @@ export const ListContainer = styled.div`
   font-size: 1rem;
   color: ${(props) => props.theme.colors.red};
   text-align: center;
+  margin-top: 1rem;
 `;
 
  
