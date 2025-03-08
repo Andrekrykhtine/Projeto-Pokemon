@@ -20,7 +20,7 @@ export const Section = styled.section`
      background-size: 20vw ; 
   }
     @media (max-width: 750px) {
-    backgroundImage: none;
+    background-image: none;
 }
 
 `;
