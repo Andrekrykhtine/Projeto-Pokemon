@@ -93,13 +93,13 @@ describe('PokemonCard', () => {
     it('should pass additional props to the Card component', () => {
         render(
             <MemoryRouter>
-                <PokemonCard pokemon={mockPokemon} className="test-class" /> {/* Passando className */}
+                <PokemonCard pokemon={mockPokemon} className="test-class" />
             </MemoryRouter>
         );
         const card = screen.getByTestId('pokemon-card');
-        expect(card).toHaveClass('test-class'); // Verifica a classe
+        expect(card.classList.contains('test-class')).toBe(true);
     });
-
+    
     it('should show propTypes warning if the prop is incorrect', () => {
         const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => { });
         render(<MemoryRouter><PokemonCard /></MemoryRouter>);
