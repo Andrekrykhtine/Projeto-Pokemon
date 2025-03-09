@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import Button from '../Componets/UI/Button/Button';
-import { ThemeContext, themes } from '../contexts/ThemeContext'; // Importe themes também
+import { ThemeContext, themes } from '../styles/Theme'; // Importe themes também
 import { vi, describe, it, expect, beforeEach } from 'vitest';
 
 describe('Button', () => {

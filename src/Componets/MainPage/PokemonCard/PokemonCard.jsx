@@ -2,20 +2,19 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Card, ImagePokemon } from './style';
 
-const PokemonCard = ({ pokemon }) => {
+const PokemonCard = ({ pokemon, className, ...props }) => { // Adicione className aqui
     if (!pokemon) {
-        return null; 
+        return null;
     }
     return (
-        <Card as={Link} to={`/pokemon/${pokemon.id}`} data-testid="pokemon-card">
+        <Card as={Link} to={`/pokemon/${pokemon.id}`} data-testid="pokemon-card" className={className} {...props}> {/* Aplique className aqui */}
             {pokemon.sprites?.other?.["official-artwork"]?.front_default && (
                 <ImagePokemon
                     src={pokemon.sprites.other["official-artwork"].front_default}
                     alt={`Imagem do ${pokemon.name}`}
                 />
             )}
-           <p data-testid="pokemon-name">{pokemon.name}</p>
-
+            <p data-testid="pokemon-name">{pokemon.name}</p>
         </Card>
     );
 };
@@ -26,12 +25,13 @@ PokemonCard.propTypes = {
         name: PropTypes.string.isRequired,
         sprites: PropTypes.shape({
             other: PropTypes.shape({
-                "official-artwork": PropTypes.shape({
+                'official-artwork': PropTypes.shape({
                     front_default: PropTypes.string.isRequired,
-                }),
-            }),
-        }),
+                }).isRequired,
+            }).isRequired,
+        }).isRequired,
     }).isRequired,
+    className: PropTypes.string, // Adicione PropTypes para className
 };
 
 export default PokemonCard;

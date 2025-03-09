@@ -101,11 +101,13 @@ describe('PokemonCard', () => {
     });
     
     it('should show propTypes warning if the prop is incorrect', () => {
-        const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => { });
+        const errorSpy = vi.spyOn(console, 'error'); // Use console.error
         render(<MemoryRouter><PokemonCard /></MemoryRouter>);
-        expect(warnSpy).toHaveBeenCalled();
-        warnSpy.mockRestore();
+        expect(errorSpy).toHaveBeenCalled();
+        errorSpy.mockRestore();
     });
+    
+
     it('should show propTypes error if the prop pokemon is invalid', () => {
         const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => { });
         const invalidPokemon = {id: '1', name: 1, sprites: {other: { 'official-artwork': { front_default: 1 } }}}
