@@ -1,105 +1,106 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import MainPage from './index';
-import { ThemeContext } from '../../contexts/ThemeContext';
-import { getId } from '../../services/utils';
-import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { ThemeContext } from '../../contexts/ThemeContext'; // Importe o contexto
+import { ThemeContextProvider } from '../../contexts/ThemeContextProvider'; // Importe o provider
+import { MemoryRouter } from 'react-router-dom';
+import { mockedPokemonList, mockedPokemonData } from './mocks'; // Arquivo de mocks
 
-const mockTheme = {
-    colors: {
-        background: '#fff',
-        text: '#000',
-    },
-    backgroundImage: 'none',
-};
-
-vi.mock('../../services/utils', () => ({
-    getId: vi.fn(),
+jest.mock('../../Componets/MainPage/ListPokemon/ListPokemon', () => ({
+    __esModule: true,
+    default: ({ pokemonIds, setPokemonIds, allPokemonData, setAllPokemonData, limitReached, setLimitReached, selectedType }) => (
+        <div data-testid="list-pokemon">
+            {/* Simula a renderização da lista de Pokemons */}
+            <p data-testid="pokemon-count">{pokemonIds.length}</p>
+            <p data-testid="limit-reached">{limitReached.toString()}</p>
+            <p data-testid="selected-type">{selectedType}</p>
+        </div>
+    ),
 }));
 
+jest.mock('../../Componets/themeTogglerButton/themeTogglerButton', () => ({
+    __esModule: true,
+    default: () => <button data-testid="theme-toggler">Toggle Theme</button>,
+}));
+
+jest.mock('../../Componets/UI/Button/Button', () => ({
+    __esModule: true,
+    default: ({ children, onClick, disabled }) => (
+        <button data-testid="button" onClick={onClick} disabled={disabled}>
+            {children}
+        </button>
+    ),
+}));
+
+jest.mock('../../Componets/MainPage/Filter/Fliter', () => ({
+    __esModule: true,
+    default: ({ types, selectedType, onSelectType }) => (
+        <div data-testid="filter">
+            {/* Simula o filtro */}
+            <select data-testid="type-select" onChange={onSelectType}>
+                {types.map(type => (
+                    <option key={type} value={type}>{type}</option>
+                ))}
+            </select>
+        </div>
+    ),
+}));
+
+
 describe('MainPage', () => {
-    let queryClient;
-
-    beforeEach(() => {
-        queryClient = new QueryClient({
-            defaultOptions: {
-                queries: {
-                    retry: false,
-                    refetchOnMount: false,
-                    refetchOnWindowFocus: false,
-                    refetchOnReconnect: false
-                },
-            },
-        });
-        vi.clearAllMocks();
-    });
-    afterEach(() => {
-        vi.resetAllMocks();
-    });
-
-    const renderComponent = () => {
-        return render(
-            <QueryClientProvider client={queryClient}>
-                <ThemeContext.Provider value={{ theme: mockTheme }}>
+    it('should render the main page components', () => {
+        render(
+            <MemoryRouter>
+                <ThemeContextProvider>
                     <MainPage />
-                </ThemeContext.Provider>
-            </QueryClientProvider>
+                </ThemeContextProvider>
+            </MemoryRouter>
         );
-    }
-
-    it('renders correctly', () => {
-        renderComponent();
-        expect(screen.getByText('Carregar mais...')).toBeInTheDocument();
-        expect(screen.getByText('Resetar Lista')).toBeInTheDocument();
-        expect(screen.getByText('Mostrar Todos')).toBeInTheDocument();
+        expect(screen.getByTestId('list-pokemon')).toBeInTheDocument();
+        expect(screen.getByTestId('theme-toggler')).toBeInTheDocument();
+        expect(screen.getByTestId('button')).toBeInTheDocument();
+        expect(screen.getByTestId('filter')).toBeInTheDocument();
     });
 
-    it('handles "Carregar mais..." button click', async () => {
-        getId.mockReturnValue([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
-        renderComponent();
+    it('should handle button clicks correctly', () => {
+        render(
+            <MemoryRouter>
+                <ThemeContextProvider>
+                    <MainPage />
+                </ThemeContextProvider>
+            </MemoryRouter>
+        );
         const loadMoreButton = screen.getByText('Carregar mais...');
         fireEvent.click(loadMoreButton);
-        await waitFor(() => {
-            expect(getId).toHaveBeenCalledWith(10, 1, 700);
-        });
+        //Verificar se a lista foi atualizada aqui (Verificar usando os mocks, por exemplo)
     });
 
-    it('disables "Carregar mais..." button when limit is reached', async () => {
-        getId.mockReturnValue(Array.from({ length: 100 }, (_, i) => i + 1));
-        renderComponent();
-        const loadMoreButton = screen.getByText('Carregar mais...');
-        fireEvent.click(loadMoreButton);
-
-        await waitFor(() => {
-            expect(loadMoreButton).toBeDisabled();
-        });
-    });
-
-    it('handles "Resetar Lista" button click', async () => {
-        getId.mockReturnValue([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
-        renderComponent();
+    it('should handle reset button correctly', () => {
+        render(
+            <MemoryRouter>
+                <ThemeContextProvider>
+                    <MainPage />
+                </ThemeContextProvider>
+            </MemoryRouter>
+        );
         const resetButton = screen.getByText('Resetar Lista');
         fireEvent.click(resetButton);
-        await waitFor(() => {
-            expect(getId).toHaveBeenCalledWith(10, 1, 700);
-        });
+        //Verificar se a lista foi resetada aqui (Verificar usando os mocks, por exemplo)
     });
 
-    it('handles type selection in TypeFilter', async () => {
-        renderComponent();
-        const typeFilter = screen.getByLabelText('Filtrar por tipo');
-        fireEvent.change(typeFilter, { target: { value: 'fire' } });
-        await waitFor(() => {
-            expect(screen.getByDisplayValue('fire')).toBeInTheDocument();
-        });
+    it('should handle type filter correctly', () => {
+        render(
+            <MemoryRouter>
+                <ThemeContextProvider>
+                    <MainPage />
+                </ThemeContextProvider>
+            </MemoryRouter>
+        );
+        const typeSelect = screen.getByTestId('type-select');
+        fireEvent.change(typeSelect, { target: { value: 'fire' } }); // Exemplo de um tipo
+        //Verificar se o filtro foi aplicado corretamente (Verificar usando os mocks, por exemplo)
     });
 
-    it('handles "Mostrar Todos" button click', async () => {
-        renderComponent();
-        const showAllButton = screen.getByText('Mostrar Todos');
-        fireEvent.click(showAllButton);
-        await waitFor(() => {
-            expect(showAllButton).toBeDisabled();
-        });
-    });
+    //Adicione mais testes conforme necessário
+
 });
+

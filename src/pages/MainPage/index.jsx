@@ -13,7 +13,7 @@ const MainPage = () => {
   const [pokemonIds, setPokemonIds] = useState([]);
   const [allPokemonData, setAllPokemonData] = useState([]);
   const [limitReached, setLimitReached] = useState(false);
-  const [selectedType, setSelectedType] = useState(null); // Estado para o tipo selecionado
+  const [selectedType, setSelectedType] = useState(''); // Estado para o tipo selecionado
   const [isLoading] = useState(false); // Estado de loading, se necessário
   const { theme } = useContext(ThemeContext);
   const handleClick = () => {
@@ -57,7 +57,7 @@ const MainPage = () => {
      <FilterColumn>
       <TypeFilter
         types={pokemonTypes} // Passa a lista de tipos
-        selectedType={selectedType} // Passa o tipo selecionado
+        selectedType={selectedType ?? ''} // Passa o tipo selecionado
         onSelectType={setSelectedType} // Passa a função para atualizar o tipo
       />
       </FilterColumn>
