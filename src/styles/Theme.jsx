@@ -9,6 +9,9 @@ export const themes = {
     backgroundColor: '#fdf57e',
     backgroundList: '#fffff5',
     color: '#000001',
+    backgroundButton: "#ff0000",
+    colorButton: "#2c3e50",
+
     // Adicionar cores do tema anterior
     colors: {
       white: "#fff",
@@ -27,6 +30,8 @@ export const themes = {
     backgroundColor: '#361735',
     backgroundList: '#000001',
     color: '#ffffff',
+    backgroundButton: "#2c3e50",
+    colorButton: "#ff0000",
     // Adicionar cores do tema anterior
     colors: {
       white: "#fff",

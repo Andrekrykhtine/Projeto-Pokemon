@@ -8,16 +8,8 @@ export const StyledThemeButton = styled(Button)`
   padding: 10px 12px;
   border-radius: 20px;
   font-size: 2.5rem;
-  background-color: ${props => 
-    props.isDarkMode 
-      ? "#2c3e50" // cor para o botão "Modo Claro" 
-      : "#ff0000"  // cor para o botão "Modo Escuro"
-  };
-  color: ${props => 
-    props.isDarkMode 
-      ? "#ff0000"  // cor do texto para o botão "Modo Claro"
-      : "#2c3e50"  // cor do texto para o botão "Modo Escuro"
-  };
+  background-color: ${(props) => props.theme.backgroundButton};
+  color: ${(props) => props.theme.colorButton};
   border: none;
   cursor: pointer;
   font-weight: bold;
