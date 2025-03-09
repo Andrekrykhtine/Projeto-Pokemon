@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { ThemeContext, themes } from "../../contexts/ThemeContext"
+import { ThemeContext, themes } from "../../styles/Theme"
 import {StyledThemeButton} from "./style"
 import { CgPokemon } from "react-icons/cg"; // Ícone para o tema claro
 import { TbCircleLetterRFilled } from "react-icons/tb"; // Ícone para o tema escuro

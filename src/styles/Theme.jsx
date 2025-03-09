@@ -1,51 +1,48 @@
-import { ThemeProvider } from 'styled-components';
-import PropTypes from 'prop-types';
+import { createContext } from 'react';
+import backgroundLight from "../assets/images/pikachu.png";
+import backgroundDark from "../assets/images/rocket.png";
 
-// Objeto de tema
-export const theme = {
-  colors: {
-    white: "#fff",
-    black: "#000",
-    red: "#ff0000",
-
-    // Cores padrão
-    primary: "#1B1B1B",
-    secondary: "#E5E5E5",
-    background: "#e5e5e5e5",
-    container: "#1B1B1B",
-    text: "#E5E5E5",
-    link: "#E5E5E5",
+// Definição dos temas
+export const themes = {
+  light: {
+    backgroundImage: `url(${backgroundLight})`,
+    backgroundColor: '#fdf57e',
+    backgroundList: '#fffff5',
+    color: '#000001',
+    // Adicionar cores do tema anterior
+    colors: {
+      white: "#fff",
+      black: "#000",
+      red: "#ff0000",
+      primary: "#1B1B1B",
+      secondary: "#E5E5E5",
+      background: "#e5e5e5e5",
+      container: "#1B1B1B",
+      text: "#000001",
+      link: "#1B1B1B",
+    }
   },
-
-  fonts: ["Press Start 2P", "sans-serif"].join(", "),
-  fontsize: {
-    small: "0.8rem", 
-    normal: "1rem",
-    large: "1.5rem",
-    xlarge: "2rem",
-    xxlarge: "2.5rem",
-    Title: "4rem",
-    Subtitle: "3rem",
-  },
-
-  breakpoints: {
-    xs: "0",
-    small: "576px",
-    medium: "768px",
-    large: "992px",
-    xl: "1200px",
-    xxl: "1400px",
-  },
+  dark: {
+    backgroundImage: `url(${backgroundDark})`,
+    backgroundColor: '#361735',
+    backgroundList: '#000001',
+    color: '#ffffff',
+    // Adicionar cores do tema anterior
+    colors: {
+      white: "#fff",
+      black: "#000",
+      red: "#ff0000",
+      primary: "#E5E5E5",
+      secondary: "#1B1B1B",
+      background: "#361735",
+      container: "#000001",
+      text: "#ffffff",
+      link: "#E5E5E5",
+    }
+  }
 };
 
-// Componente ThemeProvider
-const Theme = ({ children }) => (
-  <ThemeProvider theme={theme}>{children}</ThemeProvider>
-);
+// Criar contexto para o tema
+export const ThemeContext = createContext({});
 
-// Validação de props
-Theme.propTypes = {
-  children: PropTypes.node.isRequired,
-};
-
-export default Theme;
+// Componente provedor do tema que combina ThemeContext e ThemeProvider

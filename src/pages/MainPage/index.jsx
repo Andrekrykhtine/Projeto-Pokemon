@@ -7,7 +7,7 @@ import {getId}from '../../services/utils'
 import {Button} from '../../Componets/UI/Button/Button'
 import TypeFilter from '../../Componets/MainPage/Filter/Fliter'
 import {pokemonTypes} from '../../services/pokemonTypes'
-import { ThemeContext } from '../../contexts/ThemeContext';
+import { ThemeContext } from '../../styles/Theme';
 
 const MainPage = () => {
   const [pokemonIds, setPokemonIds] = useState([]);

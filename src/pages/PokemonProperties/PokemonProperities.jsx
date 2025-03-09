@@ -6,7 +6,7 @@ import NavigationButtons from '../../Componets/PokemonProperties/NavigationButto
 import PokemonDetails from '../../Componets/PokemonProperties/PokemonDetails/PokemonDetails';
 import { TbPokeball } from 'react-icons/tb';
 import { ThemeTogglerButton } from '../../Componets/themeTogglerButton/themeTogglerButton';
-import { ThemeContext } from '../../contexts/ThemeContext';
+import { ThemeContext } from '../../styles/Theme';
 
 const PokemonProperties = () => {
   const { id } = useParams();

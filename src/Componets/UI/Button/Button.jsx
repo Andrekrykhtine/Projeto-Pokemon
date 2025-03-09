@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Buttons } from "./style";
 import PropTypes from 'prop-types';
-import { ThemeContext } from "../../../contexts/ThemeContext";
+import { ThemeContext } from "../../../styles/Theme";
 
 export const Button = ({
     onClick,
