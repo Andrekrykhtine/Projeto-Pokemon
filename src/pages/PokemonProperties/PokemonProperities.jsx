@@ -9,42 +9,45 @@ import { ThemeTogglerButton } from '../../Componets/themeTogglerButton/themeTogg
 import { ThemeContext } from '../../styles/Theme';
 
 const PokemonProperties = () => {
-  const { id } = useParams();
+  const { id: pokemonId } = useParams();
   const navigate = useNavigate();
-  const [pokemonData, setPokemonData] = useState({ current: null, next: null, previous: null });
-  const [loading] = useState(true);
+  const [pokemonData, setPokemonData] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { theme } = useContext(ThemeContext);
 
   const fetchPokemonDataById = async (id) => {
     try {
       const data = await fetchPokemonData(id);
+      if (!data) throw new Error('Pokémon não encontrado');
       return data;
-    } catch (error) {
-      setError(error.message);
+    } catch (err) {
+      setError(err.message || 'Erro desconhecido');
       return null;
+    } finally {
+      setLoading(false);
     }
   };
 
-
   useEffect(() => {
-    const fetchCurrentPokemon = async () => {
-      const currentPokemon = await fetchPokemonDataById(id);
-      setPokemonData({ current: currentPokemon, next: null, previous: null });
+    const fetchData = async () => {
+      setLoading(true);
+      setError(null);
+      const data = await fetchPokemonDataById(pokemonId);
+      setPokemonData(data);
     };
-    fetchCurrentPokemon();
-  }, [id]);
+    fetchData();
+  }, [pokemonId]);
 
-
-  const handleNext = async () => {
-    const nextId = parseInt(id) + 1;
+  const handleNext = () => {
+    const nextId = parseInt(pokemonId, 10) + 1;
     if (nextId <= 700) {
       navigate(`/pokemon/${nextId}`);
     }
   };
 
-  const handlePrevious = async () => {
-    const previousId = parseInt(id) - 1;
+  const handlePrevious = () => {
+    const previousId = parseInt(pokemonId, 10) - 1;
     if (previousId >= 1) {
       navigate(`/pokemon/${previousId}`);
     }
@@ -54,22 +57,23 @@ const PokemonProperties = () => {
     navigate('/');
   };
 
-  if (loading && !pokemonData.current) return <p>Carregando...</p>;
-  if (error) return <p>Erro: {error}</p>;
-  if (!pokemonData.current) return <p>Pokémon não encontrado</p>;
-
+  if (loading) return <p>Carregando...</p>;
+  if (error) return <div data-testid="error-message">Erro: {error}</div>;
+  if (!pokemonData) return <p>Pokémon não encontrado</p>;
 
   return (
     <Container theme={theme}>
       <ThemeTogglerButton />
-      <BackButton onClick={handleBackToMainPage}>HOME <TbPokeball /></BackButton>
+      <BackButton data-testid="home-button" onClick={handleBackToMainPage}>
+        HOME <TbPokeball />
+      </BackButton>
       <NavigationButtons
         onPrevious={handlePrevious}
         onNext={handleNext}
-        isPreviousDisabled={parseInt(id) === 1}
-        isNextDisabled={parseInt(id) === 700}
+        isPreviousDisabled={parseInt(pokemonId, 10) === 1}
+        isNextDisabled={parseInt(pokemonId, 10) === 700}
       />
-      {pokemonData.current && <PokemonDetails pokemon={pokemonData.current} />}
+      {pokemonData && <PokemonDetails pokemon={pokemonData} />}
     </Container>
   );
 };

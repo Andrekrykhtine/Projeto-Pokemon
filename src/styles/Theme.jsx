@@ -50,4 +50,3 @@ export const themes = {
 // Criar contexto para o tema
 export const ThemeContext = createContext({});
 
-// Componente provedor do tema que combina ThemeContext e ThemeProvider

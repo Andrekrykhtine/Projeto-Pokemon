@@ -1,21 +1,41 @@
 import { Navigation, ArrowButton } from './style';
 import PropTypes from 'prop-types';
-import { ImArrowRight } from "react-icons/im";
-import { ImArrowLeft } from "react-icons/im";
+import { ImArrowLeft, ImArrowRight } from "react-icons/im";
 
 const NavigationButtons = ({ onPrevious, onNext, isPreviousDisabled, isNextDisabled }) => {
+  const handlePreviousClick = () => {
+    if (!isPreviousDisabled) {
+      onPrevious();
+    }
+  };
+
+  const handleNextClick = () => {
+    if (!isNextDisabled) {
+      onNext();
+    }
+  };
+
   return (
     <Navigation>
-      <ArrowButton onClick={onPrevious} disabled={isPreviousDisabled}>
+      <ArrowButton
+        onClick={handlePreviousClick}
+        disabled={isPreviousDisabled}
+        aria-label="previous"
+        data-testid="previous-button"
+      >
         <ImArrowLeft />
       </ArrowButton>
-      <ArrowButton onClick={onNext} disabled={isNextDisabled}>
+      <ArrowButton
+        onClick={handleNextClick}
+        disabled={isNextDisabled}
+        aria-label="next"
+        data-testid="next-button"
+      >
         <ImArrowRight />
       </ArrowButton>
     </Navigation>
   );
 };
-
 
 NavigationButtons.propTypes = {
   onPrevious: PropTypes.func.isRequired,

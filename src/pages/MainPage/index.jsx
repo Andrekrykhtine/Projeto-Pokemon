@@ -13,8 +13,8 @@ const MainPage = () => {
   const [pokemonIds, setPokemonIds] = useState([]);
   const [allPokemonData, setAllPokemonData] = useState([]);
   const [limitReached, setLimitReached] = useState(false);
-  const [selectedType, setSelectedType] = useState(''); // Estado para o tipo selecionado
-  const [isLoading] = useState(false); // Estado de loading, se necessário
+  const [selectedType, setSelectedType] = useState(''); 
+  const [isLoading] = useState(false);
   const { theme } = useContext(ThemeContext);
   const handleClick = () => {
     if (allPokemonData.length >= 100) {
@@ -31,7 +31,7 @@ const MainPage = () => {
     setPokemonIds(resetIds);
     setAllPokemonData([]);
     setLimitReached(false);
-    setSelectedType(null); // Reseta o tipo selecionado
+    setSelectedType(null); 
   };
 
   return (
@@ -47,7 +47,7 @@ const MainPage = () => {
             setAllPokemonData={setAllPokemonData}
             limitReached={limitReached}
             setLimitReached={setLimitReached}
-            selectedType={selectedType} // Passa o tipo selecionado
+            selectedType={selectedType} 
           />
         <Button onClick={handleClick} disabled={limitReached || isLoading}>
           {isLoading ? 'Carregando...' : 'Carregar mais...'}
@@ -56,9 +56,9 @@ const MainPage = () => {
     
      <FilterColumn>
       <TypeFilter
-        types={pokemonTypes} // Passa a lista de tipos
-        selectedType={selectedType ?? ''} // Passa o tipo selecionado
-        onSelectType={setSelectedType} // Passa a função para atualizar o tipo
+        types={pokemonTypes} 
+        selectedType={selectedType ?? ''}
+        onSelectType={setSelectedType} 
       />
       </FilterColumn>
 

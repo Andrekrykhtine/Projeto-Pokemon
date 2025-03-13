@@ -6,13 +6,13 @@ export const usePokemonData = ({
     setLimitReached
 }) => {
     const loadMorePokemon = useCallback(() => {
-        const newIds = getId(10, 1, 700); //carrega mais 10 ids
+        const newIds = getId(10, 1, 700); 
         setPokemonIds((prevIds) => {
            
-            const combinedIds = [...new Set([...prevIds, ...newIds])] // remove os ids duplicados
+            const combinedIds = [...new Set([...prevIds, ...newIds])] 
             if(combinedIds.length >= 100){
                 setLimitReached(true);
-                return prevIds; // se passou do limite, mantem o array anterior.
+                return prevIds; 
             }
             return combinedIds;
         });

@@ -1,112 +1,137 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { vi, describe, it, expect, beforeEach } from 'vitest';
+import { MemoryRouter, useParams, useNavigate } from 'react-router-dom';
 import PokemonProperties from '../pages/PokemonProperties/PokemonProperities';
+import { ThemeContext, themes } from '../styles/Theme';
 import { fetchPokemonData } from '../services/utils';
-import { mockedPokemonData } from './mocks';
-import { useNavigate, useParams } from 'react-router-dom';
 
-const mockUseNavigate = vi.fn();
-const mockUseParams = () => ({ pokemonId: '1' });
 
-vi.mock('react-router-dom', () => ({
-    ...jest.requireActual('react-router-dom'),
-    useNavigate: () => mockUseNavigate,
-    useParams: mockUseParams,
-}));
+vi.mock('react-router-dom', async () => {
+  const actual = await vi.importActual('react-router-dom');
+  return {
+    ...actual,
+    useParams: vi.fn(),
+    useNavigate: vi.fn(),
+  };
+});
 
 vi.mock('../services/utils', () => ({
-    fetchPokemonData: vi.fn(() => Promise.resolve(mockedPokemonData)),
+  fetchPokemonData: vi.fn(),
 }));
 
-vi.mock('../../Componets/PokemonProperties/NavigationButtons/NavigationButtons', () => ({
-    __esModule: true,
-    default: ({ onPrevious, onNext, isPreviousDisabled, isNextDisabled }) => (
-        <div data-testid="navigation-buttons">
-            <button data-testid="previous-button" onClick={onPrevious} disabled={isPreviousDisabled}>Previous</button>
-            <button data-testid="next-button" onClick={onNext} disabled={isNextDisabled}>Next</button>
-        </div>
-    ),
+vi.mock('../Componets/PokemonProperties/NavigationButtons/NavigationButtons', () => ({
+  default: ({ onPrevious, onNext, isPreviousDisabled, isNextDisabled }) => (
+    <div>
+      <button
+        onClick={onPrevious}
+        disabled={isPreviousDisabled}
+        data-testid="previous-button"
+      >
+        Anterior
+      </button>
+      <button
+        onClick={onNext}
+        disabled={isNextDisabled}
+        data-testid="next-button"
+      >
+        Próximo
+      </button>
+    </div>
+  ),
 }));
 
-vi.mock('../../Componets/PokemonProperties/NavigationButtons/NavigationButtons', () => ({
-    __esModule: true,
-    default: ({ onPrevious, onNext, isPreviousDisabled, isNextDisabled }) => (
-        <div data-testid="navigation-buttons">
-            <button data-testid="previous-button" onClick={onPrevious} disabled={isPreviousDisabled}>Previous</button>
-            <button data-testid="next-button" onClick={onNext} disabled={isNextDisabled}>Next</button>
-        </div>
-    ),
+vi.mock('../Componets/PokemonProperties/PokemonDetails/PokemonDetails', () => ({
+  default: ({ pokemon }) => <div data-testid="pokemon-details">{pokemon.name}</div>,
 }));
 
-vi.mock('../../Componets/PokemonProperties/PokemonDetails/PokemonDetails', () => ({
-    __esModule: true,
-    default: ({ pokemon }) => (
-        <div data-testid="pokemon-details">
-            <p data-testid="pokemon-name">{pokemon?.name || 'Nome não encontrado'}</p>
-            <img data-testid="pokemon-image" src={pokemon?.sprites?.other?.["official-artwork"]?.front_default || ''} alt={pokemon?.name || ''} />
-        </div>
-    ),
-}));
-
-vi.mock('../../Componets/themeTogglerButton/themeTogglerButton', () => ({
-    __esModule: true,
-    default: () => <button data-testid="theme-toggler" />,
+vi.mock('../Componets/themeTogglerButton/themeTogglerButton', () => ({
+  ThemeTogglerButton: () => <button data-testid="theme-toggler">Alternar Tema</button>,
 }));
 
 describe('PokemonProperties', () => {
-    beforeEach(() => {
-        fetchPokemonData.mockResolvedValue(mockedPokemonData);
-    });
+  const mockTheme = {
+    theme: themes.light,
+    setTheme: vi.fn(),
+  };
 
-    it('should render loading indicator initially', async () => {
-        fetchPokemonData.mockResolvedValueOnce(null);
-        render(<PokemonProperties />);
-        expect(await screen.findByText('Carregando...')).toBeInTheDocument();
-    });
+  const mockNavigate = vi.fn();
 
-    it('should render PokemonDetails when data is fetched', async () => {
-        render(<PokemonProperties />);
-        expect(await screen.findByTestId('pokemon-details')).toBeInTheDocument();
-        expect(screen.getByTestId('pokemon-name')).toHaveTextContent(mockedPokemonData.name);
-    });
+  beforeEach(() => {
+    vi.clearAllMocks();
+    useParams.mockReturnValue({ id: '2' }); // ID inicial é 2
+    useNavigate.mockReturnValue(mockNavigate);
+  });
 
-    it('should render error message if data fetching fails', async () => {
-        fetchPokemonData.mockRejectedValue(new Error('Failed to fetch data'));
-        render(<PokemonProperties />);
-        expect(await screen.findByText(/Erro:/i)).toBeInTheDocument();
-    });
+  const renderWithTheme = (ui) => {
+    return render(
+      <ThemeContext.Provider value={mockTheme}>
+        <MemoryRouter>{ui}</MemoryRouter>
+      </ThemeContext.Provider>
+    );
+  };
 
-    it('should render navigation buttons', () => {
-        render(<PokemonProperties />);
-        expect(screen.getByTestId('navigation-buttons')).toBeInTheDocument();
-    });
+  it('deve renderizar o estado de carregamento', () => {
+    fetchPokemonData.mockImplementation(() => new Promise(() => {})); // Simula carregamento infinito
 
-    it('should render theme toggler button', () => {
-        render(<PokemonProperties />);
-        expect(screen.getByTestId('theme-toggler')).toBeInTheDocument();
-    });
+    renderWithTheme(<PokemonProperties />);
+    expect(screen.getByText('Carregando...')).toBeInTheDocument();
+  });
 
-    it('should call handlePrevious when previous button is clicked', () => {
-        render(<PokemonProperties />);
-        fireEvent.click(screen.getByTestId('previous-button'));
-        expect(mockUseNavigate).toHaveBeenCalledWith('/pokemon/1');
-    });
+  it('deve renderizar uma mensagem de erro', async () => {
+    fetchPokemonData.mockRejectedValue(new Error('Erro ao buscar dados'));
 
-    it('should call handleNext when next button is clicked', () => {
-        render(<PokemonProperties />);
-        fireEvent.click(screen.getByTestId('next-button'));
-        expect(mockUseNavigate).toHaveBeenCalledWith('/pokemon/2');
-    });
+    renderWithTheme(<PokemonProperties />);
+    expect(await screen.findByTestId('error-message')).toHaveTextContent('Erro: Erro ao buscar dados');
+  });
 
-    it('should handle back button click', () => {
-        const navigate = vi.fn();
-        vi.mock('react-router-dom', () => ({
-            ...jest.requireActual('react-router-dom'),
-            useParams: () => ({ pokemonId: '1' }),
-            useNavigate: () => navigate,
-        }));
-        render(<PokemonProperties />);
-        fireEvent.click(screen.getByText('HOME'));
-        expect(navigate).toHaveBeenCalledWith('/');
-    });
+  it('deve renderizar os detalhes do Pokémon', async () => {
+    const mockPokemonData = { name: 'Pikachu', id: 1 };
+    fetchPokemonData.mockResolvedValue(mockPokemonData);
+
+    renderWithTheme(<PokemonProperties />);
+    expect(await screen.findByTestId('pokemon-details')).toHaveTextContent('Pikachu');
+  });
+
+  it('deve navegar para o próximo Pokémon', async () => {
+    const mockPokemonData = { name: 'Pikachu', id: 2 };
+    fetchPokemonData.mockResolvedValue(mockPokemonData);
+
+    renderWithTheme(<PokemonProperties />);
+    fireEvent.click(await screen.findByTestId('next-button'));
+    expect(mockNavigate).toHaveBeenCalledWith('/pokemon/3');  // Corrigido para 3, que é o próximo após o ID 2
+  });
+
+  it('deve navegar para o Pokémon anterior', async () => {
+    const mockPokemonData = { name: 'Pikachu', id: 2 };
+    fetchPokemonData.mockResolvedValue(mockPokemonData);
+    renderWithTheme(<PokemonProperties />);
+    fireEvent.click(await screen.findByTestId('previous-button'));
+    expect(mockNavigate).toHaveBeenCalledWith('/pokemon/1');
+  });
+  
+  it('deve voltar para a página inicial', async () => {
+    const mockPokemonData = { name: 'Pikachu', id: 1 };
+    fetchPokemonData.mockResolvedValue(mockPokemonData);
+
+    renderWithTheme(<PokemonProperties />);
+    fireEvent.click(await screen.findByTestId('home-button'));
+    expect(mockNavigate).toHaveBeenCalledWith('/');
+  });
+
+  it('deve desabilitar o botão "Anterior" quando o ID for 1', async () => {
+    useParams.mockReturnValue({ id: '1' }); 
+    const mockPokemonData = { name: 'Bulbasaur', id: 1 };
+    fetchPokemonData.mockResolvedValue(mockPokemonData);
+
+    renderWithTheme(<PokemonProperties />);
+    expect(await screen.findByTestId('previous-button')).toBeDisabled();
+  });
+
+  it('deve desabilitar o botão "Próximo" quando o ID for 700', async () => {
+    useParams.mockReturnValue({ id: '700' });
+    const mockPokemonData = { name: 'Pokemon700', id: 700 };
+    fetchPokemonData.mockResolvedValue(mockPokemonData);
+    renderWithTheme(<PokemonProperties />);
+    expect(await screen.findByTestId('next-button')).toBeDisabled();
+  });
 });

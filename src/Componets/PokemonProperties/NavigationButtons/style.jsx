@@ -6,8 +6,9 @@ export const Navigation = styled.div`
   margin-bottom: 20px;
 `;
 
-export const ArrowButton = styled.button`
-
+export const ArrowButton = styled.button.attrs((props) => ({
+  disabled: props.disabled
+}))`
   background-color: ${(props) => (props.disabled ? '#ccc' : '#007bff')};
   color: white;
   border: none;

@@ -5,12 +5,11 @@ import { describe, it, expect } from 'vitest';
 describe('LimitReachedMessage', () => {
   it('renders the correct message', () => {
     render(<LimitReachedMessage />);
-    expect(screen.getByText('Limite de 100 Pokémon atingido!')).toBeInTheDocument();
+    expect(screen.getByText('Limite de 100 Pokémons atingido!')).toBeInTheDocument();
   });
 
   it('should have Message component', () => {
     render(<LimitReachedMessage />);
-    //expect(screen.getByRole('paragraph')).toBeInTheDocument();//Altenativa
-    expect(screen.getByText('Limite de 100 Pokémon atingido!')).toBeInTheDocument();// Alternativa
+    expect(screen.getByText('Limite de 100 Pokémons atingido!')).toBeInTheDocument();
   });
 });

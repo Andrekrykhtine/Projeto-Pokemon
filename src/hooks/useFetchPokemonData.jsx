@@ -2,52 +2,58 @@ import { useEffect, useRef } from 'react';
 import { useQuery } from 'react-query';
 import { fetchPokemonData } from '../services/utils';
 
-export const useFetchPokemonData = ({ pokemonIds, allPokemonData, setAllPokemonData, setLimitReached }) => {
-    // Ref para armazenar os IDs dos Pokémon já processados
-    const processedIds = useRef(new Set());
+export const useFetchPokemonData = ({ 
+  pokemonIds, 
+  allPokemonData, 
+  setAllPokemonData, 
+  setLimitReached 
+}) => {
+  const processedIds = useRef(new Set(allPokemonData.map(p => p.id)));
+
+  const { isError, error, isLoading, data } = useQuery(
+    ['pokemons', pokemonIds],
+    async () => {
+      const newData = await Promise.all(
+        pokemonIds
+          .filter(id => !processedIds.current.has(id)) // Evita requisições duplicadas
+          .map(id => fetchPokemonData(id))
+      );
+      return newData;
+    },
+    {
+      enabled: pokemonIds.length > 0,
+      refetchOnWindowFocus: false,
+      staleTime: Infinity, 
+      cacheTime: 0 
+    }
+  );
+
+  useEffect(() => {
     
-    const { isError, error, isLoading, data } = useQuery(
-        ['pokemons', pokemonIds],
-        async () => {
-            const newData = await Promise.all(pokemonIds.map(id => fetchPokemonData(id)));
-            return newData;
-        },
-        {
-            enabled: pokemonIds.length > 0,
-            refetchOnWindowFocus: false,
-        }
+    if (!data?.length) return;
+  
+    const newPokemon = data.filter(p => 
+      p && !processedIds.current.has(p.id) 
     );
 
-    useEffect(() => {
-        if (!data) return;
-        
-        const newPokemon = data.filter(newPokemon => {
-          
-            if (processedIds.current.has(newPokemon.id)) {
-                return false;
-            }
-            
-            const isNewPokemon = !allPokemonData.some(
-                existingPokemon => existingPokemon.id === newPokemon.id
-            );
-          
-            if (isNewPokemon) {
-                processedIds.current.add(newPokemon.id);
-            }
-            
-            return isNewPokemon;
-        });
-        
-        if (newPokemon.length > 0) {
-            setAllPokemonData(prevData => {
-                const updatedData = [...prevData, ...newPokemon];
-                if (updatedData.length >= 100) {
-                    setLimitReached(true);
-                }
-                return updatedData;
-            });
-        }
-    }, [data]); 
+    if (newPokemon.length === 0) return;
 
-    return { isError, error, isLoading, data };
+    processedIds.current = new Set([
+      ...processedIds.current,
+      ...newPokemon.map(p => p.id)
+    ]);
+
+    setAllPokemonData(prev => {
+      const updated = [...prev, ...newPokemon];
+      if (updated.length >= 100) setLimitReached(true);
+      return updated;
+    });
+  }, [data, setAllPokemonData, setLimitReached]);
+
+  return { 
+    isError, 
+    error,
+    isLoading,
+    data: allPokemonData 
+  };
 };

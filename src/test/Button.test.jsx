@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import Button from '../Componets/UI/Button/Button';
-import { ThemeContext, themes } from '../styles/Theme'; // Importe themes também
+import { ThemeContext, themes } from '../styles/Theme'; 
 import { vi, describe, it, expect, beforeEach } from 'vitest';
 
 describe('Button', () => {
@@ -10,7 +10,7 @@ describe('Button', () => {
 
     it('renders children correctly', () => {
         render(
-            <ThemeContext.Provider value={{ theme: themes.light }}> {/* Fornece um tema */}
+            <ThemeContext.Provider value={{ theme: themes.light }}> 
                 <Button>Click Me</Button>
             </ThemeContext.Provider>
         );
@@ -20,7 +20,7 @@ describe('Button', () => {
     it('calls onClick handler when clicked', () => {
         const onClick = vi.fn();
         render(
-            <ThemeContext.Provider value={{ theme: themes.light }}> {/* Fornece um tema */}
+            <ThemeContext.Provider value={{ theme: themes.light }}>
                 <Button onClick={onClick}>Click Me</Button>
             </ThemeContext.Provider>
         );
@@ -31,7 +31,7 @@ describe('Button', () => {
 
     it('is disabled when disabled prop is true', () => {
         render(
-            <ThemeContext.Provider value={{ theme: themes.light }}> {/* Fornece um tema */}
+            <ThemeContext.Provider value={{ theme: themes.light }}> 
                 <Button disabled>Click Me</Button>
             </ThemeContext.Provider>
         );
@@ -41,7 +41,7 @@ describe('Button', () => {
 
     it('is not disabled when disabled prop is false', () => {
         render(
-            <ThemeContext.Provider value={{ theme: themes.light }}> {/* Fornece um tema */}
+            <ThemeContext.Provider value={{ theme: themes.light }}> 
                 <Button disabled={false}>Click Me</Button>
             </ThemeContext.Provider>
         );
@@ -51,7 +51,7 @@ describe('Button', () => {
 
     it('has the correct type', () => {
         render(
-            <ThemeContext.Provider value={{ theme: themes.light }}> {/* Fornece um tema */}
+            <ThemeContext.Provider value={{ theme: themes.light }}> 
                 <Button type="submit">Submit</Button>
             </ThemeContext.Provider>
         );
@@ -61,7 +61,7 @@ describe('Button', () => {
 
     it('has default type of button', () => {
         render(
-            <ThemeContext.Provider value={{ theme: themes.light }}> {/* Fornece um tema */}
+            <ThemeContext.Provider value={{ theme: themes.light }}> 
                 <Button>Click</Button>
             </ThemeContext.Provider>
         );
@@ -71,7 +71,7 @@ describe('Button', () => {
 
     it('passes additional props to the underlying button', () => {
         render(
-            <ThemeContext.Provider value={{ theme: themes.light }}> {/* Fornece um tema */}
+            <ThemeContext.Provider value={{ theme: themes.light }}> 
                 <Button data-testid="my-button" className="custom-class">
                     Click Me
                 </Button>
@@ -83,7 +83,7 @@ describe('Button', () => {
 
     it('should have theme props', () => {
         const { container } = render(
-            <ThemeContext.Provider value={{ theme: themes.light }}> {/* Fornece um tema */}
+            <ThemeContext.Provider value={{ theme: themes.light }}> 
                 <Button>
                     Click Me
                 </Button>

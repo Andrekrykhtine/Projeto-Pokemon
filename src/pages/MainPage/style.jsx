@@ -22,7 +22,6 @@ export const Section = styled.section`
     @media (max-width: 750px) {
     background-image: none;
 }
-
 `;
 
 // Contêiner da Pokedex que manterá a proporção da imagem
@@ -31,7 +30,6 @@ export const PokedexContainer = styled.div`
   width: 100%;
   max-width: 400px; 
   aspect-ratio: 16 / 9; 
-  
 
     @media (max-width: 400px) {
      max-width: 320px;
@@ -39,7 +37,6 @@ export const PokedexContainer = styled.div`
   }
 `;
 
-// Imagem da Pokedex que ocupa todo o contêiner
 export const PokedexImg = styled.img`
   width: 100%;
   position: absolute;
@@ -47,7 +44,6 @@ export const PokedexImg = styled.img`
   left: 0;
 `;
 
-// Wrapper da lista de Pokémon posicionado de forma responsiva
 export const ListPokemonWrapper = styled.div`
   position: absolute;
   gap: 1rem;
@@ -68,7 +64,6 @@ export const ListPokemonWrapper = styled.div`
 
 `;
 
-// Botão do tema posicionado de forma responsiva
 export const ThemeButtonWrapper = styled.div`
   position: absolute;
   top: 10px;

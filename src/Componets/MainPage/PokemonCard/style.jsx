@@ -4,6 +4,7 @@ export const ImagePokemon = styled.img`
 width: 60px;
 height: 60px;
 `;
+
 export const Card = styled.div`
   text-decoration: none;
   color: black;
@@ -19,7 +20,5 @@ export const Card = styled.div`
   &:hover {
     transform: scale(1.05);
   }
-
-  
 `;
 

@@ -10,12 +10,10 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeContextProvider>
-    
-          <GlobalStyle />
-          <Router>
-            <AppRoutes />
-          </Router>
- 
+        <GlobalStyle />
+        <Router>
+          <AppRoutes />
+        </Router>
       </ThemeContextProvider>
     </ QueryClientProvider>
   )

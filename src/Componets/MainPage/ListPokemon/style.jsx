@@ -1,10 +1,5 @@
 import styled from "styled-components";
 
-export const ListCard = styled.li`
-display: flex;
-align-items: center;    
-justify-content: space-between;
-`;
 
 export const Card = styled.a`
 display: flex;
@@ -37,7 +32,7 @@ export const ListContainer = styled.div`
    width: 100%;
  `;
 
- export const NoPokemonMessage = styled.div`
+ export const NoPokemonMessage = styled.p`
   font-size: 1rem;
   color: ${(props) => props.theme.colors.red};
   text-align: center;
