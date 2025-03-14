@@ -1,6 +1,13 @@
 # Projeto Pokémon 🐾
 
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
+[![Styled Components](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)](https://styled-components.com/)
+[![React Query](https://img.shields.io/badge/-React%20Query-FF4154?style=for-the-badge&logo=react%20query&logoColor=white)](https://tanstack.com/query/v4/)
+[![PropTypes](https://img.shields.io/badge/-PropTypes-8A2BE2?style=for-the-badge&logo=proptypes&logoColor=white)](https://www.npmjs.com/package/prop-types)
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://www.javascript.com/)
+
 ![Pokemon Logo](https://raw.githubusercontent.com/PokeAPI/media/master/logo/pokeapi_256.png)
+
 
 Um aplicativo web interativo para explorar e filtrar Pokémon usando a PokéAPI.
 
@@ -25,6 +32,7 @@ O Projeto Pokémon é uma aplicação web que permite aos usuários explorar uma
 ## ✨ Funcionalidades
 
 - **Listagem de Pokémon**: Exibe uma lista de Pokémon em cards, com informações como nome e imagem.
+- **Detalhes do Pokémon**: Exibe o Tipo, Movimentos e Habilidades do Pokémon selecionado.
 - **Filtragem por Tipo**: Permite filtrar os Pokémon por tipo (ex: água, fogo, elétrico).
 - **Carregamento Dinâmico**: Carrega automaticamente mais Pokémon à medida que o usuário navega.
 - **Limite de Exibição**: Exibe uma mensagem quando o limite de 100 Pokémon é atingido.
@@ -44,20 +52,24 @@ O Projeto Pokémon é uma aplicação web que permite aos usuários explorar uma
 
 ## 🛠️ Ferramentas Utilizadas
 
-- **React**: Biblioteca JavaScript para construção de interfaces de usuário.
-- **Styled Components**: Biblioteca para estilização de componentes.
-- **React Query**: Biblioteca para gerenciamento de estado e fetching de dados.
-- **PropTypes**: Biblioteca para validação de tipos de props.
-- **Context API**: Utilizada para gerenciar o tema da aplicação de forma global.
+-   **[React](https://react.dev/)** : Uma biblioteca JavaScript para construir interfaces de usuário. A arquitetura baseada em componentes do React foi essencial para criar elementos de UI reutilizáveis e gerenciar o estado da aplicação.
+-   **[Styled Components](https://styled-components.com/)** : Uma biblioteca para estilizar componentes React usando tagged template literals. Permitindo a criação de estilos modulares e reutilizáveis, além de facilitar a implementação de temas dinâmicos.
+-   **[React Query](https://tanstack.com/query/v4/)** : Uma biblioteca poderosa para buscar, armazenar em cache, sincronizar e atualizar o estado do servidor em aplicações React. Simplificando o gerenciamento de operações assíncronas.
+-   **[PropTypes](https://www.npmjs.com/package/prop-types)** : Uma biblioteca para verificação de tipo de props em tempo de execução. Mantendo a qualidade do código, garantindo que os componentes recebam os tipos corretos de dados.
+-   **[JavaScript](https://www.javascript.com/)** : A linguagem de programação principal usada no projeto.
+- **[Git](https://git-scm.com/)** : Utilizado para controle de versão, gerenciamento de mudanças e colaboração no projeto.
 
 ## 🧠 Decisões Adotadas
 
-- **Componentização**: O projeto foi dividido em componentes reutilizáveis (ex: Button, PokemonCard, ListPokemon), facilitando a manutenção e escalabilidade.
-- **Filtragem por Tipo**: A filtragem foi implementada diretamente no componente ListPokemon, evitando chamadas desnecessárias à API.
-- **Limite de 100 Pokémon**: Decidimos limitar a exibição para melhorar a performance e evitar sobrecarga de dados.
-- **Responsividade**: Utilizamos media queries para garantir uma boa experiência em dispositivos móveis.
-- **Temas Dinâmicos**: A escolha de Styled Components permitiu a implementação de temas claros e escuros de forma simples e eficiente.
 
+-   **Arquitetura Baseada em Componentes:** O projeto foi dividido em componentes reutilizáveis (ex: `Button`, `PokemonCard`, `ListPokemon`). Esta abordagem melhora a manutenibilidade, escalabilidade e reutilização do código.
+-   **Estratégia de Filtragem por Tipo:** A filtragem foi implementada diretamente no componente `ListPokemon`. Essa decisão minimizou as chamadas à API, resultando em um melhor desempenho e uma experiência de usuário mais fluida.
+-   **Limite de Exibição de Pokémon:** Limitar a exibição inicial a 100 Pokémon foi uma escolha deliberada para otimizar o desempenho e evitar sobrecarga de dados. Os usuários são notificados quando atingem esse limite.
+-   **Design Responsivo:** Media queries foram amplamente utilizadas para garantir uma experiência ideal do usuário em vários tamanhos de tela, especialmente em dispositivos móveis.
+-   **Temas Dinâmicos:** A escolha por Styled Components permitiu a implementação de temas claros e escuros de forma integrada. Esta abordagem ofereceu uma maneira simples e eficiente de gerenciar temas dentro da aplicação.
+- **React Query para Busca de Dados:** O uso do React Query proporcionou um gerenciamento de dados robusto e recursos de cache, melhorando o desempenho e simplificando a sincronização de dados.
+- **PropTypes para Validação de Tipos:** O PropTypes ajudou a garantir que os componentes recebessem os tipos de dados esperados, reduzindo erros de execução.
+-  **Uso do Vitetest:** O Vitest foi escolhido como ferramenta de testes devido à sua alta performance e compatibilidade com projetos em Vite. Sua execução rápida e integração simplificada permitem um fluxo de desenvolvimento mais eficiente, garantindo a confiabilidade do código sem comprometer a produtividade.
 ## 🚀 Como Rodar o Projeto
 
 ### Pré-requisitos
@@ -91,34 +103,56 @@ O Projeto Pokémon é uma aplicação web que permite aos usuários explorar uma
    - Abra o navegador e acesse: `http://localhost:3000`
 
 5. **Teste as funcionalidades**:
-   - Navegue pela lista de Pokémon.
-   - Use o filtro de tipo para exibir Pokémon específicos.
-   - Verifique a mensagem de limite ao atingir 100 Pokémon.
+     -   Navegue pela lista de Pokémon.
+    -   Use o filtro de tipo para visualizar tipos específicos de Pokémon.
+    -   Verifique a mensagem de limite ao exibir 100 Pokémon.
+    -   Teste o Modo Escuro, selecionando no botão superior.
+    -   Verifique a responsividade do aplicativo, alterando o tamanho da tela.
 
 ## 📁 Estrutura do Projeto
 
 ```
-projeto-pokemon/
-├── public/
-│   ├── index.html
-│   └── favicon.ico
-├── src/
-│   ├── components/
-│   │   ├── Button/
-│   │   ├── PokemonCard/
+quest-react-avancado/
+├── .gitignore                     
+├── README.md                       
+├── package.json                    
+├── package-lock.json              
+├── public/                        
+│   ├── favicon.ico                
+│   ├── index.html                 
+│   └── manifest.json              
+├── src/                           
+│   ├── App.js                     
+│   ├── index.js                   
+│   ├── components/                
+│   │   ├── Button/               
+│   │   │   ├── Button.js          
+│   │   │   └── styles.js         
+│   │   ├── Header/
+│   │   │   ├── Header.js         
+│   │   │   └── styles.js          
 │   │   ├── ListPokemon/
-│   │   └── ...
-│   ├── contexts/
-│   │   └── ThemeContext.js
-│   ├── services/
-│   │   └── api.js
-│   ├── styles/
-│   │   ├── global.js
-│   │   └── theme.js
-│   ├── App.js
-│   └── index.js
-├── package.json
-└── README.md
+│   │   │   ├── ListPokemon.js     
+│   │   │   └── styles.js          
+│   │   ├── PokemonCard/
+│   │   │   ├── PokemonCard.js     
+│   │   │   └── styles.js          
+│   │   └── Loading/
+│   │        ├── Loading.js          
+│   │        └── styles.js          
+│   ├── contexts/                 
+│   │   └── ThemeContext.js        
+│   ├── hooks/                     
+│   │   └── useTheme.js            
+│   ├── services/                  
+│   │   └── api.js                 
+│   ├── styles/                    
+│   │   ├── global.js              
+│   │   └── theme.js               
+│   └── utils/                     
+│       └── types.js               
+├── .env                          
+└── node_modules/  
 ```
 
 ## 💻 Comandos Úteis
@@ -150,9 +184,8 @@ Contribuições são bem-vindas! Para contribuir:
 ## 🙏 Agradecimentos
 
 - A [PokéAPI](https://pokeapi.co/) por fornecer uma API gratuita e completa sobre Pokémon.
-- Todos os colaboradores e testadores que ajudaram a melhorar este projeto.
 - A comunidade React por fornecer documentação e recursos excelentes.
-- Ao time de mentores que orientou o desenvolvimento deste projeto desde o início.
+- Ao time de monitores que ajudou o desenvolvimento deste projeto desde o início e ao DevQuest por proporcionar esse desafio.
 - A Nintendo e The Pokémon Company pela criação desse universo incrível.
 
 ## 📄 Licença
