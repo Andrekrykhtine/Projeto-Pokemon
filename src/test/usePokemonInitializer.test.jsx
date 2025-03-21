@@ -8,7 +8,7 @@ vi.mock("../services/utils", () => ({
 }));
 
 describe("usePokemonInitializer", () => {
-  it("deve chamar setPokemonIds com os IDs iniciais", () => {
+  it("should call setPokemonIds with the initial IDs", () => {
     const setPokemonIdsMock = vi.fn(); 
 
     renderHook(() => usePokemonInitializer({ setPokemonIds: setPokemonIdsMock }));

@@ -44,7 +44,7 @@ describe('ThemeContextProvider', () => {
     vi.clearAllMocks();
   });
 
-  it('deve renderizar children corretamente', () => {
+  it('should render children correctly', () => {
     render(
       <ThemeContextProvider>
         <div data-testid="child-element">Test Child</div>
@@ -55,7 +55,7 @@ describe('ThemeContextProvider', () => {
     expect(screen.getByTestId('child-element')).toHaveTextContent('Test Child');
   });
 
-  it('deve fornecer o tema light como padrão', () => {
+  it('should provide the light theme by default', () => {
     render(
       <ThemeContextProvider>
         <TestComponent />
@@ -68,7 +68,7 @@ describe('ThemeContextProvider', () => {
     expect(parsedTheme).toEqual(themes.light);
   });
 
-  it('deve permitir alternar entre temas', () => {
+  it('should allow toggling between themes', () => {
     render(
       <ThemeContextProvider>
         <TestComponent />
@@ -93,8 +93,7 @@ describe('ThemeContextProvider', () => {
     expect(updatedTheme).toEqual(themes.light);
   });
 
-  it('deve aplicar o tema ao ThemeProvider do styled-components', () => {
-    
+  it('should apply the theme to the styled-components ThemeProvider', () => {
     let contextValue;
     
     const ContextConsumer = () => {
@@ -113,7 +112,7 @@ describe('ThemeContextProvider', () => {
     expect(contextValue.theme).toEqual(themes.light);
   });
 
-  it('deve respeitar a interface do contexto de tema', () => {
+  it('should respect the theme context interface', () => {
     let contextValue;
     
     const ContextConsumer = () => {

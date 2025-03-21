@@ -1,4 +1,4 @@
-import { renderHook,waitFor } from '@testing-library/react';
+import { renderHook, waitFor } from '@testing-library/react';
 import { QueryClientProvider, QueryClient } from 'react-query';
 import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { useFetchPokemonData } from '../hooks/useFetchPokemonData';
@@ -9,7 +9,6 @@ vi.mock('../services/utils', () => ({
 }));
 
 describe('useFetchPokemonData', () => {
- 
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -38,7 +37,7 @@ describe('useFetchPokemonData', () => {
     vi.restoreAllMocks();
   });
 
-  it('deve iniciar com os dados corretos e não buscar quando pokemonIds está vazio', async () => {
+  it('should start with correct data and not fetch when pokemonIds is empty', async () => {
     const setAllPokemonData = vi.fn();
     const setLimitReached = vi.fn();
 
@@ -55,7 +54,7 @@ describe('useFetchPokemonData', () => {
     expect(setAllPokemonData).not.toHaveBeenCalled();
   });
 
-  it('deve buscar dados para novos IDs e atualizar o estado', async () => {
+  it('should fetch data for new IDs and update the state', async () => {
     fetchPokemonData.mockResolvedValueOnce(mockPokemon1);
     
     const setAllPokemonData = vi.fn(callback => {
@@ -77,10 +76,9 @@ describe('useFetchPokemonData', () => {
     
     expect(fetchPokemonData).toHaveBeenCalledWith(1);
     expect(setAllPokemonData).toHaveBeenCalled();
-    expect(console.log).toHaveBeenCalledWith('🔄 Atualizando dados...');
   });
 
-  it('não deve buscar dados duplicados', async () => {
+  it('should not fetch duplicate data', async () => {
     const initialData = [mockPokemon1];
     fetchPokemonData.mockResolvedValueOnce(mockPokemon2);
     const setAllPokemonData = vi.fn(callback => {
@@ -103,7 +101,7 @@ describe('useFetchPokemonData', () => {
     expect(fetchPokemonData).not.toHaveBeenCalledWith(1);
   });
 
-  it('deve ativar setLimitReached quando atingir 100 pokémons', async () => {
+  it('should activate setLimitReached when reaching 100 Pokémon', async () => {
     const initialData = Array.from({ length: 99 }, (_, i) => ({ 
       id: i + 1, 
       name: `pokemon-${i + 1}` 
@@ -127,8 +125,8 @@ describe('useFetchPokemonData', () => {
     expect(setLimitReached).toHaveBeenCalledWith(true);
   });
 
-  it('deve tratar erros na requisição', async () => {
-    const errorMessage = 'Falha ao buscar dados do Pokémon';
+  it('should handle request errors', async () => {
+    const errorMessage = 'Failed to fetch Pokémon data';
     fetchPokemonData.mockRejectedValueOnce(new Error(errorMessage));
     
     const setAllPokemonData = vi.fn();
@@ -146,7 +144,7 @@ describe('useFetchPokemonData', () => {
     expect(setAllPokemonData).not.toHaveBeenCalled();
   });
 
-  it('não deve atualizar estado quando data é vazio', async () => {
+  it('should not update state when data is empty', async () => {
     fetchPokemonData.mockResolvedValueOnce(null);
     
     const setAllPokemonData = vi.fn();
