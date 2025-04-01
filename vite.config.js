@@ -1,9 +1,21 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vite.dev/config/
+
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react({
+      babel: {
+        babelrc: true, // Habilita a leitura do .babelrc
+        configFile: true, // Habilita a leitura do babel.config.js
+      }
+    })
+  ],
+  build: {
+    rollupOptions: {
+      external: ['@tanstack/react-query'] 
+    }
+  },
   test: {
     globals: true,
     environment: 'jsdom',
