@@ -1,5 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import path from 'path'
+import { fileURLToPath } from 'url'
 
 
 export default defineConfig({
@@ -21,5 +23,9 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './src/test/setup.js',
     mode: 'development'
+  },
+  resolve: {
+      '@tanstack/react-query': path.resolve(path.dirname(fileURLToPath(import.meta.url)), 'node_modules/@tanstack/react-query/dist/react-query.development.js')
+    }
   }
-})
+)
