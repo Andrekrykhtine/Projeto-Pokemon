@@ -1,5 +1,5 @@
 import { renderHook, waitFor } from '@testing-library/react';
-import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { QueryClientProvider, QueryClient } from 'react-query';
 import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { useFetchPokemonData } from '../hooks/useFetchPokemonData';
 import { fetchPokemonData } from '../services/utils';

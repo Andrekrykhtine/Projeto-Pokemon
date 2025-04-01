@@ -1,8 +1,0 @@
-{
-    "compilerOptions": {
-      "baseUrl": ".",
-      "paths": {
-        "@tanstack/react-query": ["./node_modules/@tanstack/react-query/dist/react-query.development.js"]
-      }
-    }
-  }

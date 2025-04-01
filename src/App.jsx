@@ -1,13 +1,12 @@
-import { QueryClient, QueryClientProvider }from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "react-query"
 import { BrowserRouter as Router } from "react-router-dom";
 import { GlobalStyle } from "./styles/global";
 import AppRoutes from "./routes";
 import { ThemeContextProvider } from "./contexts/ThemeContextProvider";
 
-const queryClient = new QueryClient();
-
 function App() {
- 
+  const queryClient = new QueryClient();
+
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeContextProvider>
@@ -16,8 +15,8 @@ function App() {
           <AppRoutes />
         </Router>
       </ThemeContextProvider>
-    </QueryClientProvider>
-  );
+    </ QueryClientProvider>
+  )
 }
 
-export default App;
+export default App
