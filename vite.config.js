@@ -24,6 +24,9 @@ export default defineConfig({
     setupFiles: './src/test/setup.js',
     mode: 'development'
   },
+  css: {
+    postcss: './postcss.config.js'
+  },
   resolve: {
       '@tanstack/react-query': path.resolve(path.dirname(fileURLToPath(import.meta.url)), 'node_modules/@tanstack/react-query/dist/react-query.development.js')
     }
