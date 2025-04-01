@@ -42,13 +42,16 @@ O Projeto Pokémon é uma aplicação web que permite aos usuários explorar uma
 ## 📸 Screenshots
 
 ### Tela Principal - Modo Claro
-![Tela Principal - Modo Claro](/api/placeholder/650/350)
+![Tela Principal - Modo Claro](/src/assets/images/tela-pc-claro.png)
 
 ### Filtragem por Tipo - Modo Escuro
-![Filtragem por Tipo - Modo Escuro](/api/placeholder/650/350)
+![Filtragem por Tipo - Modo Escuro](/src/assets/images/tela-pc-escuro.png)
 
 ### Visualização Mobile
-![Visualização Mobile](/api/placeholder/350/650)
+![Visualização Mobile](/src/assets/images/tela-mobile.png)
+
+### Visualização Mobile
+![Visualização Propriedades Pokémon](/src/assets/images/tela-propriedades.png)
 
 ## 🛠️ Ferramentas Utilizadas
 
