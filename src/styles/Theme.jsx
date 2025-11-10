@@ -19,7 +19,7 @@ export const themes = {
       red: "#ff0000",
       primary: "#1B1B1B",
       secondary: "#E5E5E5",
-      background: "#e5e5e5e5",
+      background: "#fdf57e",
       container: "#1B1B1B",
       text: "#000001",
       link: "#1B1B1B",
