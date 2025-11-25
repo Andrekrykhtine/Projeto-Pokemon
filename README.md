@@ -97,9 +97,9 @@ O Projeto Pokémon é uma aplicação web que permite aos usuários explorar uma
 
 3. **Inicie o servidor de desenvolvimento**:
    ```bash
-   npm start
+   npm run dev
    # ou
-   yarn start
+   yarn run dev
    ```
 
 4. **Acesse a aplicação**:
