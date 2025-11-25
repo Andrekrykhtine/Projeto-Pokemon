@@ -7,7 +7,7 @@ export const Container = styled.div`
   `;
 
 export const BackButton = styled.button`
-  background-color:rgb(224, 11, 11); /* Cinza */
+  background-color:rgb(224, 11, 11); 
   color: white;
   border: none;
   padding: 10px 20px;
@@ -17,6 +17,6 @@ export const BackButton = styled.button`
   transition: background-color 0.3s;
 
   &:hover {
-    background-color: #5a6268; /* Escurece o cinza */
+    background-color: #5a6268;
   }
 `;

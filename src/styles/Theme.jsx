@@ -6,7 +6,7 @@ import backgroundDark from "../assets/images/rocket.png";
 export const themes = {
   light: {
     backgroundImage: `url(${backgroundLight})`,
-    backgroundColor: '#fdf57e',
+    backgroundColor: '#ffff',
     backgroundList: '#fffff5',
     color: '#000001',
     backgroundButton: "#ff0000",
