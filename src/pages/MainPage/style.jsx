@@ -12,7 +12,7 @@ export const Section = styled.section`
   text-align: center;
   width: 100vw; 
   height: 100vh; 
-  margin: 0 auto;
+  margin: 0px auto;
   padding: 1rem 0;
   position: relative;
   overflow: hidden; // Evita barras de rolagem
@@ -29,7 +29,8 @@ export const PokedexContainer = styled.div`
   position: relative;
   width: 100%;
   max-width: 400px; 
-  aspect-ratio: 16 / 9; 
+  aspect-ratio: 16 / 9;
+  margin : 50px auto; 
 
     @media (max-width: 400px) {
      max-width: 320px;
